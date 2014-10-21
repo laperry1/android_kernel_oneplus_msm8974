@@ -63,6 +63,7 @@ void *return_address(unsigned int level)
 #endif
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 void *return_address(unsigned int level)
 {
@@ -70,6 +71,8 @@ void *return_address(unsigned int level)
 }
 
 >>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
+=======
+>>>>>>> 7838ec4... Compability with GCC 5.1
 #endif /* if defined(CONFIG_FRAME_POINTER) && !defined(CONFIG_ARM_UNWIND) / else */
 
 EXPORT_SYMBOL_GPL(return_address);

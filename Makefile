@@ -245,12 +245,17 @@ CONFIG_SHELL := $(shell if [ -x "$$BASH" ]; then echo $$BASH; \
 
 HOSTCC       = gcc
 HOSTCXX      = g++
+<<<<<<< HEAD
 
 HOSTCFLAGS = -Wall -Wmissing-prototypes -Wstrict-prototypes -O3 -fomit-frame-pointer -floop-flatten -floop-parallelize-all -ftree-loop-linear -floop-interchange -floop-strip-mine -floop-block -fgcse-las  -fpredictive-commoning -fgcse-after-reload  -ftree-loop-distribute-patterns -ftree-slp-vectorize
 HOSTCXXFLAGS = -O3 -floop-flatten -floop-parallelize-all -ftree-loop-linear -floop-interchange -floop-strip-mine -floop-block -fgcse-las -fpredictive-commoning -fgcse-after-reload   -ftree-loop-distribute-patterns -ftree-slp-vectorize
 
 #archer
 KBUILD_CFLAGS	+= -s -pipe -fno-pic -mcpu=cortex-a15 -mtune=cortex-a15 -mfloat-abi=softfp -mfpu=vfpv4  -Wno-unused --param l1-cache-size=16 --param l1-cache-line-size=16 --param l2-cache-size=2048
+=======
+HOSTCFLAGS   = -Wall -Wmissing-prototypes -Wstrict-prototypes -O2 -fomit-frame-pointer -std=gnu89
+HOSTCXXFLAGS = -O2
+>>>>>>> 7838ec4... Compability with GCC 5.1
 
 # Decide whether to build built-in, modular, or both.
 # Normally, just do built-in.
@@ -372,10 +377,11 @@ LINUXINCLUDE    := -I$(srctree)/arch/$(hdr-arch)/include \
 
 KBUILD_CPPFLAGS := -D__KERNEL__
 
-KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
+KBUILD_CFLAGS   := -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -fno-strict-aliasing -fno-common \
 		   -Werror-implicit-function-declaration \
 		   -Wno-format-security \
+<<<<<<< HEAD
 		   -mcpu=cortex-a15 -mtune=cortex-a15 -mfpu=neon-vfpv4 -marm \
 		   -fsingle-precision-constant \
 		   -fgcse-lm -fgcse-sm -fsched-spec-load -fforce-addr \
@@ -387,6 +393,13 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 
 
 		   
+=======
+		   -Wno-maybe-uninitialized \
+		   -fno-delete-null-pointer-checks \
+		   -Wno-sizeof-pointer-memaccess \
+		   -std=gnu89
+
+>>>>>>> 7838ec4... Compability with GCC 5.1
 # arter97's optimizations
 KBUILD_CFLAGS	+= -s -pipe -fno-pic -O2 -mcpu=cortex-a15 -mtune=cortex-a15 -mfloat-abi=softfp -mfpu=vfpv4
 # -Wno-unused
