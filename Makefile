@@ -328,9 +328,13 @@ include $(srctree)/scripts/Kbuild.include
 
 # Make variables (CC, etc...)
 
+STRICT_FLAGS := -fstrict-aliasing \
+		-Werror=strict-aliasing
+
 AS		= $(CROSS_COMPILE)as
 LD		= $(CROSS_COMPILE)ld
-REAL_CC		= $(CROSS_COMPILE)gcc
+CC		= $(CROSS_COMPILE)gcc $(STRICT_FLAGS)
+LDFINAL	        = $(LD)
 CPP		= $(CC) -E
 AR		= $(CROSS_COMPILE)ar
 NM		= $(CROSS_COMPILE)nm
