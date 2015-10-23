@@ -10,6 +10,7 @@
  * GNU General Public License for more details.
  */
 
+<<<<<<< HEAD
 &pm8941_lsid1 {
 	qcom,leds@d000 {
 		status = "disabled";
@@ -66,6 +67,13 @@
 			linux,default-trigger = "none";
 			qcom,use-blink;
 		};
+=======
+/include/ "../msm8974-leds.dtsi"
+
+&pm8941_lsid1 {
+	qcom,leds@d000 {
+		status = "disabled";
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	};
 
 	qcom,leds@d300 {
@@ -81,4 +89,66 @@
 			qcom,current = <53>;
 		};
 	};
+<<<<<<< HEAD
+=======
+
+	qcom,leds@d800 {
+		status = "disabled";
+	};
+
+	qcom,leds@d900 {
+		status = "disabled";
+	};
+
+	qcom,leds@da00 {
+		status = "disabled";
+	};
+
+	qcom,leds@db00 {
+		status = "disabled";
+	};
+
+	qcom,leds@dc00 {
+		status = "disabled";
+	};
+
+	qcom,leds@dd00 {
+		status = "disabled";
+	};
+
+	qcom,leds@de00 {
+		status = "disabled";
+	};
+
+	qcom,leds@df00 {
+		status = "disabled";
+	};
+
+	qcom,leds@e000 {
+		status = "disabled";
+	};
+
+	qcom,leds@e100 {
+		status = "disabled";
+	};
+
+	qcom,leds@e200 {
+		qcom,kpdbl1 {
+			linux,name = "button-backlight";
+			qcom,max-current = <15>;
+		};
+
+		qcom,kpdbl2 {
+			status = "disabled";
+		};
+
+		qcom,kpdbl3 {
+			status = "disabled";
+		};
+
+		qcom,kpdbl4 {
+			status = "disabled";
+		};
+	};
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 };

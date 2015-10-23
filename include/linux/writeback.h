@@ -76,6 +76,10 @@ struct writeback_control {
 	unsigned tagged_writepages:1;	/* tag-and-write to avoid livelock */
 	unsigned for_reclaim:1;		/* Invoked from the page allocator */
 	unsigned range_cyclic:1;	/* range_start is cyclic */
+<<<<<<< HEAD
+=======
+	unsigned for_sync:1;		/* sync(2) WB_SYNC_ALL writeback */
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 };
 
 /*

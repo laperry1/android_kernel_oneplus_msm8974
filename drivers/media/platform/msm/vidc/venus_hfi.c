@@ -1086,6 +1086,21 @@ static int __unset_free_ocmem(struct venus_hfi_device *device)
 	if (!device->res->ocmem_size)
 		return rc;
 
+<<<<<<< HEAD
+=======
+	mutex_lock(&device->write_lock);
+	mutex_lock(&device->read_lock);
+	rc = IS_VENUS_IN_VALID_STATE(device);
+	mutex_unlock(&device->read_lock);
+	mutex_unlock(&device->write_lock);
+
+	if (!rc) {
+		dprintk(VIDC_WARN,
+			"Core is in bad state, Skipping unset OCMEM\n");
+		goto core_in_bad_state;
+	}
+
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	init_completion(&release_resources_done);
 	rc = __unset_ocmem(device);
 	if (rc) {
@@ -1102,6 +1117,10 @@ static int __unset_free_ocmem(struct venus_hfi_device *device)
 		goto release_resources_failed;
 	}
 
+<<<<<<< HEAD
+=======
+core_in_bad_state:
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	rc = __free_ocmem(device);
 	if (rc) {
 		dprintk(VIDC_ERR, "Failed to free OCMEM during PC\n");
@@ -2055,6 +2074,7 @@ static int venus_hfi_core_release(void *device)
 			return -EIO;
 		}
 		mutex_unlock(&dev->clk_pwr_lock);
+<<<<<<< HEAD
 		rc = __unset_free_ocmem(dev);
 		if (rc)
 			dprintk(VIDC_ERR,
@@ -2062,6 +2082,17 @@ static int venus_hfi_core_release(void *device)
 					rc);
 		mutex_lock(&dev->clk_pwr_lock);
 		rc = venus_hfi_clk_gating_off(device);
+=======
+		if (dev->state != VENUS_STATE_DEINIT) {
+                    rc = __unset_free_ocmem(dev);
+                    if (rc)
+                        dprintk(VIDC_ERR,
+                                "Failed in unset_free_ocmem() in %s, rc : %d\n",
+                                __func__, rc);
+                }
+                mutex_lock(&dev->clk_pwr_lock);
+                rc = venus_hfi_clk_gating_off(device);
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		if (rc) {
 			dprintk(VIDC_ERR,
 					"%s : Clock enable failed\n", __func__);
@@ -2143,11 +2174,29 @@ static void venus_hfi_core_clear_interrupt(struct venus_hfi_device *device)
 	u32 intr_status = 0;
 	int rc = 0;
 
+<<<<<<< HEAD
+=======
+	if (!device) {
+		dprintk(VIDC_ERR, "%s Invalid paramter: %p\n",
+			__func__, device);
+		return;
+	}
+
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	if (!device->callback)
 		return;
 
 	mutex_lock(&device->write_lock);
 	mutex_lock(&device->clk_pwr_lock);
+<<<<<<< HEAD
+=======
+	if (device->state == VENUS_STATE_DEINIT) {
+		dprintk(VIDC_DBG, "SPURIOUS_INTR for device: 0x%x: "
+			"times: %d interrupt_status: %d",
+			(u32) device, ++device->spur_count, intr_status);
+		goto err_clk_gating_off;
+	}
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	rc = venus_hfi_clk_gating_off(device);
 	if (rc) {
 		dprintk(VIDC_ERR,
@@ -2913,6 +2962,21 @@ static void venus_hfi_pm_hndlr(struct work_struct *work)
 	device->pc_num_cmds = 0;
 	mutex_unlock(&device->clk_pwr_lock);
 
+<<<<<<< HEAD
+=======
+	mutex_lock(&device->write_lock);
+	mutex_lock(&device->read_lock);
+	rc = IS_VENUS_IN_VALID_STATE(device);
+	mutex_unlock(&device->read_lock);
+	mutex_unlock(&device->write_lock);
+
+	if (!rc) {
+		dprintk(VIDC_WARN,
+			"Core is in bad state, Skipping power collapse\n");
+		return;
+	}
+
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	rc = __unset_free_ocmem(device);
 	if (rc) {
 		dprintk(VIDC_ERR,
@@ -3016,6 +3080,12 @@ static void venus_hfi_process_msg_event_notify(
 		(struct hfi_msg_event_notify_packet *)msg_hdr;
 	if (event_pkt && event_pkt->event_id ==
 		HFI_EVENT_SYS_ERROR) {
+<<<<<<< HEAD
+=======
+
+		VENUS_SET_STATE(device, VENUS_STATE_DEINIT);
+
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		vsfr = (struct hfi_sfr_struct *)
 				device->sfr.align_virtual_addr;
 		if (vsfr)
@@ -3029,7 +3099,12 @@ static void venus_hfi_response_handler(struct venus_hfi_device *device)
 	u32 rc = 0;
 	struct hfi_sfr_struct *vsfr = NULL;
 	dprintk(VIDC_INFO, "#####venus_hfi_response_handler#####\n");
+<<<<<<< HEAD
 	if (device) {
+=======
+	/* Process messages only if device is in valid state*/
+	if (device && device->state != VENUS_STATE_DEINIT) {
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		if ((device->intr_status &
 			VIDC_WRAPPER_INTR_CLEAR_A2HWD_BMSK)) {
 			dprintk(VIDC_ERR, "Received: Watchdog timeout %s",
@@ -3044,6 +3119,19 @@ static void venus_hfi_response_handler(struct venus_hfi_device *device)
 		}
 
 		while (!venus_hfi_iface_msgq_read(device, packet)) {
+<<<<<<< HEAD
+=======
+			/* During SYS_ERROR processing the device state
+			*  will be changed to DEINIT. Below check will
+			*  make sure no messages messages are read or
+			*  processed after processing SYS_ERROR
+			*/
+			if (device->state == VENUS_STATE_DEINIT) {
+				dprintk(VIDC_ERR,
+					"core DEINIT'd, stopping q reads\n");
+				break;
+			}
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 			rc = hfi_process_msg_packet(device->callback,
 				device->device_id,
 				(struct vidc_hal_msg_pkt_hdr *) packet,
@@ -3743,6 +3831,7 @@ static void venus_hfi_unload_fw(void *dev)
 	}
 }
 
+<<<<<<< HEAD
 static int venus_hfi_resurrect_fw(void *dev)
 {
 	struct venus_hfi_device *device = dev;
@@ -3783,6 +3872,8 @@ exit:
 	return rc;
 }
 
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 static int venus_hfi_get_fw_info(void *dev, struct hal_fw_info *fw_info)
 {
 	int rc = 0, i = 0, j = 0;
@@ -4027,7 +4118,10 @@ static void venus_init_hfi_callbacks(struct hfi_device *hdev)
 	hdev->iommu_get_domain_partition = venus_hfi_iommu_get_domain_partition;
 	hdev->load_fw = venus_hfi_load_fw;
 	hdev->unload_fw = venus_hfi_unload_fw;
+<<<<<<< HEAD
 	hdev->resurrect_fw = venus_hfi_resurrect_fw;
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	hdev->get_fw_info = venus_hfi_get_fw_info;
 	hdev->get_info = venus_hfi_get_info;
 	hdev->get_stride_scanline = venus_hfi_get_stride_scanline;

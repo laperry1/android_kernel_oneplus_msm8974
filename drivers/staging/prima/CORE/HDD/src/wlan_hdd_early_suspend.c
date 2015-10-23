@@ -2006,6 +2006,12 @@ VOS_STATUS hdd_wlan_re_init(void)
 #ifdef HAVE_WCNSS_CAL_DOWNLOAD
    int              max_retries = 0;
 #endif
+<<<<<<< HEAD
+=======
+#ifdef HAVE_CBC_DONE
+   int              max_cbc_retries = 0;
+#endif
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 #ifdef WLAN_BTAMP_FEATURE
    hdd_config_t     *pConfig = NULL;
    WLANBAP_ConfigType btAmpConfig;
@@ -2026,6 +2032,18 @@ VOS_STATUS hdd_wlan_re_init(void)
    }
 #endif
 
+<<<<<<< HEAD
+=======
+#ifdef HAVE_CBC_DONE
+   while (!wcnss_cbc_complete() && 20 >= ++max_cbc_retries) {
+       msleep(1000);
+   }
+   if (max_cbc_retries >= 20) {
+      hddLog(VOS_TRACE_LEVEL_FATAL, "%s:CBC not completed", __func__);
+   }
+#endif
+
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
    vos_set_reinit_in_progress(VOS_MODULE_ID_VOSS, TRUE);
 
    /* The driver should always be initialized in STA mode after SSR */

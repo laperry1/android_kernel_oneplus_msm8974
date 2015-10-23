@@ -3485,6 +3485,7 @@ eHalStatus sme_Encryptmsgsend (tHalHandle hHal,
                                int length,
                                pEncryptMsgRSPCb encCB);
 
+<<<<<<< HEAD
 /* --------------------------------------------------------------------------
 
     \fn sme_IsCoexScoIndicationSet
@@ -3496,6 +3497,8 @@ eHalStatus sme_Encryptmsgsend (tHalHandle hHal,
 
   --------------------------------------------------------------------------*/
 tANI_BOOLEAN sme_IsCoexScoIndicationSet(tHalHandle hHal);
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 eHalStatus sme_SetMiracastVendorConfig(tHalHandle hHal,
                                tANI_U32 iniNumBuffAdvert,

@@ -108,9 +108,16 @@ static inline struct msi_desc *irq_desc_get_msi_desc(struct irq_desc *desc)
  * irqchip-style controller then we call the ->handle_irq() handler,
  * and it calls __do_IRQ() if it's attached to an irqtype-style controller.
  */
+<<<<<<< HEAD
 static inline void generic_handle_irq_desc(unsigned int irq, struct irq_desc *desc)
 {
 	desc->handle_irq(irq, desc);
+=======
+
+static inline bool generic_handle_irq_desc(unsigned int irq, struct irq_desc *desc)
+{
+	return desc->handle_irq(irq, desc);
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 }
 
 int generic_handle_irq(unsigned int irq);

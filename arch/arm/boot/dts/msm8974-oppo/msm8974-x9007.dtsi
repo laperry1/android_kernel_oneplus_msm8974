@@ -22,6 +22,7 @@
 /include/ "msm8974-oppo-leds.dtsi"
 
 &soc {
+<<<<<<< HEAD
     i2c@f9923000 {
         pic16f_fastcg@25{
             status = "okay";
@@ -29,6 +30,22 @@
             reg = <0x25>;
         };
     };
+=======
+	i2c@f9923000 {
+		pic16f_fastcg@25 {
+			status = "okay";
+			compatible = "microchip,pic16f_fastcg";
+			reg = <0x25>;
+		};
+	};
+	i2c@f9924000 {
+		sn3193_issi_rgb@68 {
+			compatible = "sn3193,issi-rgb";
+			reg = <0x68>;
+			sn3193,sdb-gpio = <&msmgpio 45 0x00>;
+		};
+	};
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 };
 
 &i2c_1 {
@@ -36,6 +53,7 @@
 };
 
 &spi_0 {
+<<<<<<< HEAD
 	compatible;
 	reg-names;
 	reg = <>;
@@ -52,4 +70,7 @@
 	qcom,bam-consumer-pipe-index;
 	qcom,bam-producer-pipe-index;
 	qcom,master-id;
+=======
+	status = "disabled";
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 };

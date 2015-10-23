@@ -1393,6 +1393,11 @@ static int snd_pcm_do_drain_init(struct snd_pcm_substream *substream, int state)
 			if (! snd_pcm_playback_empty(substream)) {
 				snd_pcm_do_start(substream, SNDRV_PCM_STATE_DRAINING);
 				snd_pcm_post_start(substream, SNDRV_PCM_STATE_DRAINING);
+<<<<<<< HEAD
+=======
+			} else {
+				runtime->status->state = SNDRV_PCM_STATE_SETUP;
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 			}
 			break;
 		case SNDRV_PCM_STATE_RUNNING:

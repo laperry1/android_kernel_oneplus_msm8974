@@ -285,3 +285,11 @@ config SUSPEND_TIME
 	  Prints the time spent in suspend in the kernel log, and
 	  keeps statistics on the time spent in suspend in
 	  /sys/kernel/debug/suspend_time
+<<<<<<< HEAD
+=======
+
+config DEDUCE_WAKEUP_REASONS
+	bool
+	default n
+
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd

@@ -44,3 +44,8 @@ obj-$(CONFIG_FB_MSM_QPIC_ILI_QVGA_PANEL) += qpic_panel_ili_qvga.o
 obj-$(CONFIG_FB_MSM_MDSS) += mdss_fb.o
 
 obj-$(CONFIG_FB_MSM_MDSS_DSI_CTRL_STATUS) += mdss_dsi_status.o
+<<<<<<< HEAD
+=======
+
+obj-$(CONFIG_FB_MSM_MDSS) += mdss_livedisplay.o
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd

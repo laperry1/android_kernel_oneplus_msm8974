@@ -305,10 +305,13 @@ struct mdss_dsi_ctrl_pdata {
 
 	struct dsi_panel_cmds on_cmds;
 	struct dsi_panel_cmds off_cmds;
+<<<<<<< HEAD
 #ifdef CONFIG_MACH_OPPO
 	int calibration_available;
 	struct dsi_panel_cmds calibration_cmds;
 #endif
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 	struct dsi_panel_cmds video2cmd;
 	struct dsi_panel_cmds cmd2video;

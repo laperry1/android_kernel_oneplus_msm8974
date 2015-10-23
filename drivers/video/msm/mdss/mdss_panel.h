@@ -68,7 +68,12 @@ enum {
 enum {
 	MDSS_PANEL_POWER_OFF = 0,
 	MDSS_PANEL_POWER_ON,
+<<<<<<< HEAD
 	MDSS_PANEL_POWER_DOZE,
+=======
+	MDSS_PANEL_POWER_LP1,
+	MDSS_PANEL_POWER_LP2,
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 };
 
 enum {
@@ -310,6 +315,11 @@ struct mdss_mdp_pp_tear_check {
 	u32 refx100;
 };
 
+<<<<<<< HEAD
+=======
+struct mdss_livedisplay_ctx;
+
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 struct mdss_panel_info {
 	u32 xres;
 	u32 yres;
@@ -372,6 +382,7 @@ struct mdss_panel_info {
 	struct lvds_panel_info lvds;
 	struct edp_panel_info edp;
 
+<<<<<<< HEAD
 #ifdef CONFIG_MACH_OPPO
 	int cabc_available;
 	int cabc_mode;
@@ -385,6 +396,10 @@ struct mdss_panel_info {
 	bool color_enhance_available;
 	bool color_enhance_enabled;
 #endif
+=======
+	struct mdss_livedisplay_ctx *livedisplay;
+
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 };
 
 struct mdss_panel_data {
@@ -545,8 +560,13 @@ static inline bool mdss_panel_is_power_on(int panel_power_state)
  * @panel_power_state: enum identifying the power state to be checked
  *
  * This function returns true if the panel is in an intermediate low power
+<<<<<<< HEAD
  * state where it is still on but not fully interactive. It may still accept
  * commands and display updates but would be operating in a low power mode.
+=======
+ * state where it is still on but not fully interactive. It may or may not
+ * accept any commands and display updates.
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
  */
 static inline bool mdss_panel_is_power_on_lp(int panel_power_state)
 {
@@ -555,6 +575,22 @@ static inline bool mdss_panel_is_power_on_lp(int panel_power_state)
 }
 
 /**
+<<<<<<< HEAD
+=======
+ * mdss_panel_is_panel_power_on_ulp: - checks if panel is in ultra low power mode
+ * @pdata: pointer to the panel struct associated to the panel
+ * @panel_power_state: enum identifying the power state to be checked
+ *
+ * This function returns true if the panel is in a ultra low power
+ * state where it is still on but cannot recieve any display updates.
+ */
+static inline bool mdss_panel_is_power_on_ulp(int panel_power_state)
+{
+	return panel_power_state == MDSS_PANEL_POWER_LP2;
+}
+
+/**
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
  * mdss_panel_intf_type: - checks if a given intf type is primary
  * @intf_val: panel interface type of the individual controller
  *

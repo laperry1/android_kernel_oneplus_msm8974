@@ -1166,6 +1166,7 @@ static int __init SN3193_dev_init(void)
 		ret = -ENOMEM;
 		goto err_exit;
 	}
+<<<<<<< HEAD
 /*OPPO yuyi 2014-02-20 modified begin for SN3193 would not be used*/
 #ifndef VENDOR_EDIT
 	pr_info("yanghai shineld driver init\n");
@@ -1180,6 +1181,10 @@ static int __init SN3193_dev_init(void)
 	};
 #endif
 /*OPPO yuyi 2014-02-20 modified end for SN3193 would not be used*/
+=======
+	pr_info("yanghai shineld driver init\n");
+	return i2c_add_driver(&SN3193_driver);
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 err_exit:
 	return ret;
 }

@@ -25,9 +25,12 @@
 #define SYNAPTICS_DSX_DRIVER_VERSION 0x1016
 
 #include <linux/version.h>
+<<<<<<< HEAD
 #ifdef CONFIG_HAS_EARLYSUSPEND
 #include <linux/earlysuspend.h>
 #endif
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 #if (LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 38))
 #define KERNEL_ABOVE_2_6_38
@@ -89,6 +92,7 @@ enum LCD_TYPE {
 	LCD_TYPE_MAX
 };
 
+<<<<<<< HEAD
 //#define SYNC_RMI4_PWR
 
 #ifdef SYNC_RMI4_PWR
@@ -97,6 +101,8 @@ extern void synaptics_rmi4_sync_lcd_resume(void);
 #endif
 
 
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 /*
  * struct synaptics_rmi4_fn_desc - function descriptor fields in PDT
  * @query_base_addr: base address for query registers
@@ -226,9 +232,12 @@ struct synaptics_rmi4_data {
 	struct regulator *regulator;
 	struct mutex rmi4_reset_mutex;
 	struct mutex rmi4_io_ctrl_mutex;
+<<<<<<< HEAD
 #ifdef CONFIG_HAS_EARLYSUSPEND
 	struct early_suspend early_suspend;
 #endif
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	unsigned char current_page;
 	unsigned char button_0d_enabled;
 	unsigned char full_pm_cycle;

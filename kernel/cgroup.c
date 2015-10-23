@@ -2123,7 +2123,10 @@ static int cgroup_attach_proc(struct cgroup *cgrp, struct task_struct *leader)
 	/*
 	 * step 5: success! and cleanup
 	 */
+<<<<<<< HEAD
 	synchronize_rcu();
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	cgroup_wakeup_rmdir_waiter(cgrp);
 	retval = 0;
 out_put_css_set_refs:

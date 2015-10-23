@@ -43,6 +43,7 @@
 #include "wcdcal-hwdep.h"
 
 
+<<<<<<< HEAD
 struct sound_control {
 	int default_headphones_value;
 	int default_speaker_value;
@@ -57,6 +58,8 @@ struct sound_control {
 	.recording_lock = false,
 };
 
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 #define TAIKO_MAD_SLIMBUS_TX_PORT 12
 #define TAIKO_MAD_AUDIO_FIRMWARE_PATH "wcd9320/wcd9320_mad_audio.bin"
 #define TAIKO_VALIDATE_RX_SBPORT_RANGE(port) ((port >= 16) && (port <= 22))
@@ -4759,6 +4762,7 @@ static int taiko_volatile(struct snd_soc_codec *ssc, unsigned int reg)
 	return 0;
 }
 
+<<<<<<< HEAD
 static int reg_access(unsigned int reg)
 {
 	int ret = 1;
@@ -4788,6 +4792,11 @@ static int taiko_write(struct snd_soc_codec *codec, unsigned int reg,
 	unsigned int value)
 {
 	int val;
+=======
+static int taiko_write(struct snd_soc_codec *codec, unsigned int reg,
+	unsigned int value)
+{
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	int ret;
 	struct wcd9xxx *wcd9xxx = codec->control_data;
 
@@ -4803,6 +4812,7 @@ static int taiko_write(struct snd_soc_codec *codec, unsigned int reg,
 				reg, ret);
 	}
 
+<<<<<<< HEAD
 	if (!reg_access(reg))
 		val = wcd9xxx_reg_read(&wcd9xxx->core_res, reg);
 	else
@@ -4811,6 +4821,10 @@ static int taiko_write(struct snd_soc_codec *codec, unsigned int reg,
 	return wcd9xxx_reg_write(&wcd9xxx->core_res, reg, val);
 }
 
+=======
+	return wcd9xxx_reg_write(&wcd9xxx->core_res, reg, value);
+}
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 static unsigned int taiko_read(struct snd_soc_codec *codec,
 				unsigned int reg)
 {
@@ -7586,6 +7600,7 @@ static struct regulator *taiko_codec_find_regulator(struct snd_soc_codec *codec,
 	return NULL;
 }
 
+<<<<<<< HEAD
 void update_headphones_volume_boost(unsigned int vol_boost)
 {
 	int default_val = soundcontrol.default_headphones_value;
@@ -7643,6 +7658,8 @@ void update_mic_gain(unsigned int vol_boost)
 		TAIKO_A_CDC_TX3_VOL_CTL_GAIN));
 }
 
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 static int taiko_codec_probe(struct snd_soc_codec *codec)
 {
 	struct wcd9xxx *control;
@@ -7656,8 +7673,11 @@ static int taiko_codec_probe(struct snd_soc_codec *codec)
 	struct wcd9xxx *core = dev_get_drvdata(codec->dev->parent);
 	struct wcd9xxx_core_resource *core_res;
 
+<<<<<<< HEAD
 	soundcontrol.snd_control_codec = codec;
 
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	codec->control_data = dev_get_drvdata(codec->dev->parent);
 	control = codec->control_data;
 
@@ -7844,6 +7864,7 @@ static int taiko_codec_probe(struct snd_soc_codec *codec)
 
 	codec->ignore_pmdown_time = 1;
 
+<<<<<<< HEAD
 	/*
 	 * Get the default values during probe
 	 */
@@ -7854,6 +7875,8 @@ static int taiko_codec_probe(struct snd_soc_codec *codec)
 	soundcontrol.default_mic_value = taiko_read(codec,
 		TAIKO_A_CDC_TX3_VOL_CTL_GAIN);
 
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	return ret;
 
 err_irq:

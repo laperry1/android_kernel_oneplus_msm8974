@@ -104,6 +104,7 @@ void *kvmalloc(size_t size)
 	return buffer;
 }
 
+<<<<<<< HEAD
 /**
  * do_vfree - workqueue routine for freeing vmalloced memory
  * @work: data to be freed
@@ -135,3 +136,5 @@ void kvfree(void *buffer)
 	} else
 		kfree(buffer);
 }
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd

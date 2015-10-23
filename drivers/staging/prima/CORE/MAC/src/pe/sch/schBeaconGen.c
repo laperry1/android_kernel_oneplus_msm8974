@@ -60,7 +60,11 @@
 // Temporarily (maybe for all of Alpha-1), assuming TIM = 0
 //
 
+<<<<<<< HEAD
 tANI_U8 P2pOui[] = {0x50, 0x6F, 0x9A, 0x9};
+=======
+const tANI_U8 P2pOui[] = {0x50, 0x6F, 0x9A, 0x9};
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 
 tSirRetStatus schGetP2pIeOffset(tANI_U8 *pExtraIe, tANI_U32 extraIeLen, tANI_U16 *pP2pIeOffset)

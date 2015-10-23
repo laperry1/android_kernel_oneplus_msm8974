@@ -86,7 +86,11 @@ ENTRY(cpu_v7_dcache_clean_area)
 	add	r0, r0, r2
 	subs	r1, r1, r2
 	bhi	2b
+<<<<<<< HEAD
 	dsb
+=======
+	dsb	ishst
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	mov	pc, lr
 ENDPROC(cpu_v7_dcache_clean_area)
 

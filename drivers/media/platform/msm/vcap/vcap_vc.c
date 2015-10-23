@@ -129,7 +129,11 @@ static struct timeval interpolate_ts(struct timeval tv, uint32_t delta)
 	return tv;
 }
 
+<<<<<<< HEAD
 static inline void vc_isr_error_checking(struct vcap_dev *dev,
+=======
+inline void vc_isr_error_checking(struct vcap_dev *dev,
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		struct v4l2_event v4l2_evt, uint32_t irq)
 {
 	if (irq & 0x200) {
@@ -184,7 +188,11 @@ inline uint8_t vc_isr_buffer_done_count(struct vcap_dev *dev,
 	return done_count;
 }
 
+<<<<<<< HEAD
 static inline bool vc_isr_verify_expect_buf_rdy(struct vcap_dev *dev,
+=======
+inline bool vc_isr_verify_expect_buf_rdy(struct vcap_dev *dev,
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		struct vcap_client_data *c_data, struct v4l2_event v4l2_evt,
 		uint32_t irq, uint8_t done_count, uint8_t tot, uint8_t buf_num)
 {
@@ -204,7 +212,11 @@ static inline bool vc_isr_verify_expect_buf_rdy(struct vcap_dev *dev,
 	return false;
 }
 
+<<<<<<< HEAD
 static inline void vc_isr_update_timestamp(struct vcap_dev *dev,
+=======
+inline void vc_isr_update_timestamp(struct vcap_dev *dev,
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		struct vcap_client_data *c_data)
 {
 	uint32_t timestamp;
@@ -226,7 +238,11 @@ static inline void vc_isr_update_timestamp(struct vcap_dev *dev,
 	c_data->vc_action.last_ts = timestamp;
 }
 
+<<<<<<< HEAD
 static inline void vc_isr_no_new_buffer(struct vcap_dev *dev,
+=======
+inline void vc_isr_no_new_buffer(struct vcap_dev *dev,
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		struct vcap_client_data *c_data, struct v4l2_event v4l2_evt)
 {
 	v4l2_evt.type = V4L2_EVENT_PRIVATE_START +
@@ -241,7 +257,11 @@ static inline void vc_isr_no_new_buffer(struct vcap_dev *dev,
 	atomic_inc(&dev->dbg_p.vc_drop_count);
 }
 
+<<<<<<< HEAD
 static void vc_isr_switch_buffers(struct vcap_dev *dev,
+=======
+inline void vc_isr_switch_buffers(struct vcap_dev *dev,
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		struct vcap_client_data *c_data, struct vcap_buffer *buf,
 		struct vb2_buffer *vb, uint8_t idx, int done_count, int i)
 {
@@ -265,7 +285,11 @@ static void vc_isr_switch_buffers(struct vcap_dev *dev,
 	c_data->vc_action.buf[idx] = buf;
 }
 
+<<<<<<< HEAD
 static bool vc_isr_change_buffers(struct vcap_dev *dev,
+=======
+inline bool vc_isr_change_buffers(struct vcap_dev *dev,
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		struct vcap_client_data *c_data, struct v4l2_event v4l2_evt,
 		int done_count, uint8_t tot, uint8_t buf_num)
 {

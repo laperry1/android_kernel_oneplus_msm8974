@@ -1060,7 +1060,11 @@ static inline u32 msm_pc_debug_counters_read_register(
 	return readl_relaxed(reg + (index * 4 + offset) * 4);
 }
 
+<<<<<<< HEAD
 char *counter_name[MSM_PC_NUM_COUNTERS] = {
+=======
+static char *counter_name[] = {
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		"PC Entry Counter",
 		"Warmboot Entry Counter",
 		"PC Bailout Counter"
@@ -1072,6 +1076,7 @@ static int msm_pc_debug_counters_copy(
 	int j;
 	u32 stat;
 	unsigned int cpu;
+<<<<<<< HEAD
 	unsigned int len;
 
 	for_each_possible_cpu(cpu) {
@@ -1090,6 +1095,21 @@ static int msm_pc_debug_counters_copy(
 
 			data->len += len;
 
+=======
+
+	for_each_possible_cpu(cpu) {
+		data->len += scnprintf(data->buf + data->len,
+				sizeof(data->buf)-data->len,
+				"CPU%d\n", cpu);
+
+		for (j = 0; j < MSM_PC_NUM_COUNTERS; j++) {
+			stat = msm_pc_debug_counters_read_register(
+					data->reg, cpu, j);
+			data->len += scnprintf(data->buf + data->len,
+					sizeof(data->buf)-data->len,
+					"\t%s : %d\n", counter_name[j],
+					stat);
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		}
 
 	}

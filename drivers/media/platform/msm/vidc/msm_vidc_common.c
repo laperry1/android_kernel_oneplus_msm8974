@@ -615,7 +615,15 @@ static void handle_event_change(enum command_response cmd, void *data)
 		rc = msm_vidc_check_session_supported(inst);
 		if (!rc) {
 			msm_vidc_queue_v4l2_event(inst, event);
+<<<<<<< HEAD
 		}
+=======
+		} else if (rc) {
+			msm_vidc_queue_v4l2_event(inst,
+				V4L2_EVENT_MSM_VIDC_HW_OVERLOAD);
+		}
+		wake_up(&inst->kernel_event_queue);
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 		return;
 	} else {
@@ -859,6 +867,7 @@ struct sys_err_handler_data {
 	struct delayed_work work;
 };
 
+<<<<<<< HEAD
 
 void hw_sys_error_handler(struct work_struct *work)
 {
@@ -902,14 +911,22 @@ exit:
 	kfree(handler);
 }
 
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 static void handle_sys_error(enum command_response cmd, void *data)
 {
 	struct msm_vidc_cb_cmd_done *response = data;
 	struct msm_vidc_core *core = NULL;
+<<<<<<< HEAD
 	struct sys_err_handler_data *handler = NULL;
 	struct hfi_device *hdev = NULL;
 	struct msm_vidc_inst *inst = NULL;
 	int rc = 0;
+=======
+        struct hfi_device *hdev = NULL;
+	int rc = 0;
+	struct msm_vidc_inst *inst = NULL;
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 	subsystem_crashed("venus");
 	if (!response) {
@@ -954,6 +971,7 @@ static void handle_sys_error(enum command_response cmd, void *data)
 		msm_vidc_queue_v4l2_event(inst,
 				V4L2_EVENT_MSM_VIDC_SYS_ERROR);
 	}
+<<<<<<< HEAD
 	mutex_unlock(&core->lock);
 
 
@@ -974,6 +992,28 @@ static void handle_sys_error(enum command_response cmd, void *data)
 	* error.
 	*/
 	schedule_delayed_work(&handler->work, msecs_to_jiffies(5000));
+=======
+
+        if (core->state == VIDC_CORE_INVALID) {
+		dprintk(VIDC_DBG, "Calling core_release\n");
+		rc = call_hfi_op(hdev, core_release,
+			hdev->hfi_device_data);
+		if (rc) {
+			dprintk(VIDC_ERR, "core_release failed\n");
+			mutex_unlock(&core->lock);
+			return;
+		}
+        }
+
+        core->state = VIDC_CORE_UNINIT;
+        call_hfi_op(hdev, unload_fw, hdev->hfi_device_data);
+        dprintk(VIDC_DBG, "Firmware unloaded\n");
+        if (core->resources.ocmem_size)
+            msm_comm_unvote_buses(core, DDR_MEM|OCMEM_MEM);
+        else
+            msm_comm_unvote_buses(core, DDR_MEM);
+	mutex_unlock(&core->lock);
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 }
 
 static void handle_session_close(enum command_response cmd, void *data)
@@ -1289,6 +1329,7 @@ static void handle_fbd(enum command_response cmd, void *data)
 			time_usec = fill_buf_done->timestamp_hi;
 			time_usec = (time_usec << 32) |
 				fill_buf_done->timestamp_lo;
+<<<<<<< HEAD
 		} else {
 			time_usec = 0;
 			dprintk(VIDC_DBG,
@@ -1300,6 +1341,11 @@ static void handle_fbd(enum command_response cmd, void *data)
 		}
 		vb->v4l2_buf.timestamp =
 			ns_to_timeval(time_usec * NSEC_PER_USEC);
+=======
+			vb->v4l2_buf.timestamp =
+				ns_to_timeval(time_usec * NSEC_PER_USEC);
+		}
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		vb->v4l2_buf.flags = 0;
 		extra_idx =
 			EXTRADATA_IDX(inst->fmts[CAPTURE_PORT]->num_planes);
@@ -2531,7 +2577,12 @@ int msm_comm_qbuf(struct vb2_buffer *vb)
 	}
 
 	if (inst->state == MSM_VIDC_CORE_INVALID ||
+<<<<<<< HEAD
 		core->state == VIDC_CORE_INVALID) {
+=======
+		core->state == VIDC_CORE_INVALID ||
+		core->state == VIDC_CORE_UNINIT) {
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		dprintk(VIDC_ERR, "Core is in bad state. Can't Queue\n");
 		return -EINVAL;
 	}
@@ -3172,6 +3223,10 @@ int msm_comm_flush(struct msm_vidc_inst *inst, u32 flags)
 	msm_comm_flush_dynamic_buffers(inst);
 	mutex_unlock(&inst->sync_lock);
 	if (inst->state == MSM_VIDC_CORE_INVALID ||
+<<<<<<< HEAD
+=======
+			core->state == VIDC_CORE_UNINIT ||
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 			core->state == VIDC_CORE_INVALID) {
 		dprintk(VIDC_ERR,
 				"Core %p and inst %p are in bad state\n",
@@ -3488,11 +3543,16 @@ int msm_vidc_check_session_supported(struct msm_vidc_inst *inst)
 	if (rc) {
 		change_inst_state(inst, MSM_VIDC_CORE_INVALID);
 		msm_comm_kill_session(inst);
+<<<<<<< HEAD
 		msm_vidc_queue_v4l2_event(inst,
 					V4L2_EVENT_MSM_VIDC_HW_OVERLOAD);
 		dprintk(VIDC_WARN,
 			"%s: Hardware is overloaded\n", __func__);
 		wake_up(&inst->kernel_event_queue);
+=======
+		dprintk(VIDC_WARN,
+			"%s: Hardware is overloaded\n", __func__);
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	}
 	return rc;
 }
@@ -3618,11 +3678,21 @@ void msm_comm_smem_free(struct msm_vidc_inst *inst, struct msm_smem *mem)
 			"%s: invalid params: %p %p\n", __func__, inst, mem);
 		return;
 	}
+<<<<<<< HEAD
 	if (power_on_for_smem(inst))
 		return;
 
 	return msm_smem_free(inst->mem_client, mem);
 }
+=======
+	if (inst->state != MSM_VIDC_CORE_INVALID) {
+            if (power_on_for_smem(inst))
+		return;
+        }
+
+	return msm_smem_free(inst->mem_client, mem);
+        }
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 int msm_comm_smem_cache_operations(struct msm_vidc_inst *inst,
 		struct msm_smem *mem, enum smem_cache_ops cache_ops)
@@ -3638,12 +3708,23 @@ int msm_comm_smem_cache_operations(struct msm_vidc_inst *inst,
 struct msm_smem *msm_comm_smem_user_to_kernel(struct msm_vidc_inst *inst,
 			int fd, u32 offset, enum hal_buffer buffer_type)
 {
+<<<<<<< HEAD
 	if (!inst) {
 		dprintk(VIDC_ERR, "%s: invalid inst: %p\n", __func__, inst);
 		return NULL;
 	}
 	if (power_on_for_smem(inst))
 		return NULL;
+=======
+        if (!inst) {
+		dprintk(VIDC_ERR, "%s: invalid inst: %p\n", __func__, inst);
+		return NULL;
+	}
+	if (inst->state != MSM_VIDC_CORE_INVALID) {
+            if (power_on_for_smem(inst))
+		return NULL;
+        }
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 	return msm_smem_user_to_kernel(inst->mem_client,
 			fd, offset, buffer_type);

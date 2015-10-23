@@ -359,7 +359,11 @@ extern bool pm_wakeup_pending(void);
 extern bool pm_get_wakeup_count(unsigned int *count, bool block);
 extern bool pm_save_wakeup_count(unsigned int count);
 extern void pm_wakep_autosleep_enabled(bool set);
+<<<<<<< HEAD
 
+=======
+extern void pm_get_active_wakeup_sources(char *pending_sources, size_t max);
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 static inline void lock_system_sleep(void)
 {
 	current->flags |= PF_FREEZER_SKIP;

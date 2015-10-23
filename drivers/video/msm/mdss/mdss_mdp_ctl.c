@@ -1973,11 +1973,19 @@ int mdss_mdp_ctl_stop(struct mdss_mdp_ctl *ctl, int power_state)
 		mdss_mdp_ctl_write(ctl, off, 0);
 	}
 
+<<<<<<< HEAD
 	ctl->power_state = power_state;
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	ctl->play_cnt = 0;
 	mdss_mdp_ctl_perf_update(ctl, 0);
 
 end:
+<<<<<<< HEAD
+=======
+	if (!ret)
+		ctl->power_state = power_state;
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	mdss_mdp_clk_ctrl(MDP_BLOCK_POWER_OFF, false);
 
 	mutex_unlock(&ctl->lock);

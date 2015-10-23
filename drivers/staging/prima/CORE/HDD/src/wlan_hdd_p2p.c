@@ -256,8 +256,11 @@ eHalStatus wlan_hdd_remain_on_channel_callback( tHalHandle hHal, void* pCtx,
     }
     vos_mem_free( pRemainChanCtx );
     pRemainChanCtx = NULL;
+<<<<<<< HEAD
     if (eHAL_STATUS_SUCCESS != status)
         complete(&pAdapter->rem_on_chan_ready_event);
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
     complete(&pAdapter->cancel_rem_on_chan_var);
     pAdapter->is_roc_inprogress = FALSE;
     hdd_allow_suspend();
@@ -293,7 +296,10 @@ VOS_STATUS wlan_hdd_cancel_existing_remain_on_channel(hdd_adapter_t *pAdapter)
          */
         if (pRemainChanCtx->hdd_remain_on_chan_cancel_in_progress != TRUE)
         {
+<<<<<<< HEAD
             mutex_unlock(&pHddCtx->roc_lock);
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
             status = wait_for_completion_interruptible_timeout(
                                         &pAdapter->rem_on_chan_ready_event,
                                         msecs_to_jiffies(WAIT_REM_CHAN_READY));
@@ -304,11 +310,18 @@ VOS_STATUS wlan_hdd_cancel_existing_remain_on_channel(hdd_adapter_t *pAdapter)
                        " ready indication %d",
                         __func__, status);
                 pRemainChanCtx->is_pending_roc_cancelled = TRUE;
+<<<<<<< HEAD
+=======
+                mutex_unlock(&pHddCtx->roc_lock);
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
                 return VOS_STATUS_E_FAILURE;
             }
 
             INIT_COMPLETION(pAdapter->cancel_rem_on_chan_var);
+<<<<<<< HEAD
             mutex_lock(&pHddCtx->roc_lock);
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
             pRemainChanCtx->hdd_remain_on_chan_cancel_in_progress = TRUE;
             mutex_unlock(&pHddCtx->roc_lock);
 
@@ -809,19 +822,28 @@ int __wlan_hdd_cfg80211_cancel_remain_on_channel( struct wiphy *wiphy,
     /* FIXME cancel currently running remain on chan.
      * Need to check cookie and cancel accordingly
      */
+<<<<<<< HEAD
     mutex_lock(&pHddCtx->roc_lock);
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
     if( (cfgState->remain_on_chan_ctx == NULL) ||
         (cfgState->remain_on_chan_ctx->cookie != cookie) )
     {
         hddLog( LOGE,
             "%s: No Remain on channel pending with specified cookie value",
              __func__);
+<<<<<<< HEAD
         mutex_unlock(&pHddCtx->roc_lock);
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
         return -EINVAL;
     }
     if (TRUE != pRemainChanCtx->is_pending_roc_cancelled)
     {
+<<<<<<< HEAD
        mutex_unlock(&pHddCtx->roc_lock);
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
        /* wait until remain on channel ready event received
         * for already issued remain on channel request */
        status = wait_for_completion_interruptible_timeout(&pAdapter->rem_on_chan_ready_event,
@@ -835,13 +857,19 @@ int __wlan_hdd_cfg80211_cancel_remain_on_channel( struct wiphy *wiphy,
            return 0;
 
        }
+<<<<<<< HEAD
         mutex_lock(&pHddCtx->roc_lock);
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
     }
     else
     {
         hddLog( LOG1, FL("Cancel ROC event is already pending, "
                          "waiting for ready on channel indication.") );
+<<<<<<< HEAD
         mutex_unlock(&pHddCtx->roc_lock);
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
         return 0;
     }
     if (NULL != cfgState->remain_on_chan_ctx)
@@ -849,7 +877,10 @@ int __wlan_hdd_cfg80211_cancel_remain_on_channel( struct wiphy *wiphy,
         vos_timer_stop(&cfgState->remain_on_chan_ctx->hdd_remain_on_chan_timer);
         if (TRUE == pRemainChanCtx->hdd_remain_on_chan_cancel_in_progress)
         {
+<<<<<<< HEAD
             mutex_unlock(&pHddCtx->roc_lock);
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
             hddLog( LOG1,
                     FL("ROC timer cancellation in progress,"
                        " wait for completion"));
@@ -867,7 +898,10 @@ int __wlan_hdd_cfg80211_cancel_remain_on_channel( struct wiphy *wiphy,
         else
             pRemainChanCtx->hdd_remain_on_chan_cancel_in_progress = TRUE;
     }
+<<<<<<< HEAD
     mutex_unlock(&pHddCtx->roc_lock);
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
     INIT_COMPLETION(pAdapter->cancel_rem_on_chan_var);
     /* Issue abort remain on chan request to sme.
      * The remain on channel callback will make sure the remain_on_chan

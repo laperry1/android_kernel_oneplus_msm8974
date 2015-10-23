@@ -3652,6 +3652,7 @@ static int binder_transactions_show(struct seq_file *m, void *unused)
 
 static int binder_proc_show(struct seq_file *m, void *unused)
 {
+<<<<<<< HEAD
 	struct binder_proc *proc = m->private;
 	int do_lock = !binder_debug_no_lock;
 
@@ -3659,6 +3660,27 @@ static int binder_proc_show(struct seq_file *m, void *unused)
 		binder_lock(__func__);
 	seq_puts(m, "binder proc state:\n");
 	print_binder_proc(m, proc, 1);
+=======
+	struct binder_proc *itr;
+	struct binder_proc *proc = m->private;
+	struct hlist_node *pos;
+	int do_lock = !binder_debug_no_lock;
+	bool valid_proc = false;
+
+	if (do_lock)
+		binder_lock(__func__);
+
+	hlist_for_each_entry(itr, pos, &binder_procs, proc_node) {
+		if (itr == proc) {
+			valid_proc = true;
+			break;
+		}
+	}
+	if (valid_proc) {
+		seq_puts(m, "binder proc state:\n");
+		print_binder_proc(m, proc, 1);
+	}
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	if (do_lock)
 		binder_unlock(__func__);
 	return 0;

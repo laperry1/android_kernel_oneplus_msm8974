@@ -564,7 +564,11 @@ void page_unlock_anon_vma(struct anon_vma *anon_vma)
  * Returns virtual address or -EFAULT if page's index/offset is not
  * within the range mapped the @vma.
  */
+<<<<<<< HEAD
 static unsigned long
+=======
+inline unsigned long
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 vma_address(struct page *page, struct vm_area_struct *vma)
 {
 	pgoff_t pgoff = page->index << (PAGE_CACHE_SHIFT - PAGE_SHIFT);

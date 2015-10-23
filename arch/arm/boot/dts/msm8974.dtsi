@@ -77,7 +77,11 @@
 
 		adsp_mem: adsp_region {
 			linux,reserve-contiguous-region;
+<<<<<<< HEAD
 			reg = <0 0x3F00000>;
+=======
+			reg = <0 0x4100000>;
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 			label = "adsp_mem";
 		};
 

@@ -13,7 +13,13 @@ obj-y			:= filemap.o mempool.o oom_kill.o fadvise.o \
 			   readahead.o swap.o truncate.o vmscan.o shmem.o \
 			   prio_tree.o util.o mmzone.o vmstat.o backing-dev.o \
 			   page_isolation.o mm_init.o mmu_context.o percpu.o \
+<<<<<<< HEAD
 			   compaction.o $(mmu-y)
+=======
+			   compaction.o $(mmu-y) \
+			   showmem.o vmpressure.o
+
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 obj-y += init-mm.o
 
 ifdef CONFIG_NO_BOOTMEM
@@ -44,7 +50,11 @@ obj-$(CONFIG_FS_XIP) += filemap_xip.o
 obj-$(CONFIG_MIGRATION) += migrate.o
 obj-$(CONFIG_QUICKLIST) += quicklist.o
 obj-$(CONFIG_TRANSPARENT_HUGEPAGE) += huge_memory.o
+<<<<<<< HEAD
 obj-$(CONFIG_CGROUP_MEM_RES_CTLR) += memcontrol.o page_cgroup.o vmpressure.o
+=======
+obj-$(CONFIG_CGROUP_MEM_RES_CTLR) += memcontrol.o page_cgroup.o
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 obj-$(CONFIG_MEMORY_FAILURE) += memory-failure.o
 obj-$(CONFIG_HWPOISON_INJECT) += hwpoison-inject.o
 obj-$(CONFIG_DEBUG_KMEMLEAK) += kmemleak.o

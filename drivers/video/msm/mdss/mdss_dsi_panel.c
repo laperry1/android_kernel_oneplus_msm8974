@@ -23,6 +23,10 @@
 #include <linux/err.h>
 
 #include "mdss_dsi.h"
+<<<<<<< HEAD
+=======
+#include "mdss_livedisplay.h"
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 #define DT_CMD_HDR 6
 
@@ -30,6 +34,7 @@ DEFINE_LED_TRIGGER(bl_led_trigger);
 
 #ifdef CONFIG_MACH_OPPO
 extern int lm3630_bank_a_update_status(u32 bl_level);
+<<<<<<< HEAD
 
 /* Xiaori.Yuan@Mobile Phone Software Dept.Driver, 2014/02/17  Add for set cabc */
 static struct dsi_panel_cmds cabc_off_sequence;
@@ -501,6 +506,8 @@ int mdss_dsi_panel_set_panel_calibration(struct mdss_panel_data *pdata,
 
 	return 0;
 }
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 #endif
 
 void mdss_dsi_panel_pwm_cfg(struct mdss_dsi_ctrl_pdata *ctrl)
@@ -609,7 +616,11 @@ u32 mdss_dsi_panel_cmd_read(struct mdss_dsi_ctrl_pdata *ctrl, char cmd0,
 	return 0;
 }
 
+<<<<<<< HEAD
 static void mdss_dsi_panel_cmds_send(struct mdss_dsi_ctrl_pdata *ctrl,
+=======
+void mdss_dsi_panel_cmds_send(struct mdss_dsi_ctrl_pdata *ctrl,
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 			struct dsi_panel_cmds *pcmds)
 {
 	struct dcs_cmd_req cmdreq;
@@ -749,6 +760,7 @@ int mdss_dsi_panel_reset(struct mdss_panel_data *pdata, int enable)
 			for (i = 0; i < pdata->panel_info.rst_seq_len; ++i) {
 				gpio_set_value((ctrl_pdata->rst_gpio),
 					pdata->panel_info.rst_seq[i]);
+<<<<<<< HEAD
 #ifdef CONFIG_MACH_OPPO
 				if (gpio_is_valid(ctrl_pdata->lcd_5v_en_gpio))
 					gpio_direction_output((ctrl_pdata->lcd_5v_en_gpio),
@@ -757,6 +769,16 @@ int mdss_dsi_panel_reset(struct mdss_panel_data *pdata, int enable)
 				if (pdata->panel_info.rst_seq[++i])
 					usleep(pinfo->rst_seq[i] * 1000);
 			}
+=======
+				if (pdata->panel_info.rst_seq[++i])
+					usleep(pinfo->rst_seq[i] * 1000);
+			}
+#ifdef CONFIG_MACH_OPPO
+			if (gpio_is_valid(ctrl_pdata->lcd_5v_en_gpio)) {
+				gpio_direction_output(ctrl_pdata->lcd_5v_en_gpio, 1);
+			}
+#endif
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		}
 
 		if (gpio_is_valid(ctrl_pdata->mode_gpio)) {
@@ -1056,6 +1078,7 @@ static int mdss_dsi_panel_on(struct mdss_panel_data *pdata)
 	if (ctrl->on_cmds.cmd_cnt)
 		mdss_dsi_panel_cmds_send(ctrl, &ctrl->on_cmds);
 
+<<<<<<< HEAD
 #ifdef CONFIG_MACH_OPPO
 	if (ctrl->calibration_available && ctrl->calibration_cmds.cmd_cnt)
 		mdss_dsi_panel_cmds_send(ctrl, &ctrl->calibration_cmds);
@@ -1065,6 +1088,9 @@ static int mdss_dsi_panel_on(struct mdss_panel_data *pdata)
 
 	mdss_dsi_update_cabc_level(ctrl);
 #endif
+=======
+	mdss_livedisplay_update(ctrl, MODE_UPDATE_ALL);
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 end:
 	pinfo->blank_state = MDSS_PANEL_BLANK_UNBLANK;
@@ -1174,7 +1200,11 @@ static void mdss_dsi_parse_trigger(struct device_node *np, char *trigger,
 }
 
 
+<<<<<<< HEAD
 static int mdss_dsi_parse_dcs_cmds(struct device_node *np,
+=======
+int mdss_dsi_parse_dcs_cmds(struct device_node *np,
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		struct dsi_panel_cmds *pcmds, char *cmd_key, char *link_key)
 {
 	const char *data;
@@ -1868,6 +1898,7 @@ static int mdss_panel_parse_dt(struct device_node *np,
 	mdss_dsi_parse_dcs_cmds(np, &ctrl_pdata->off_cmds,
 		"qcom,mdss-dsi-off-command", "qcom,mdss-dsi-off-command-state");
 
+<<<<<<< HEAD
 #ifdef CONFIG_MACH_OPPO
 /* Xiaori.Yuan@Mobile Phone Software Dept.Driver, 2014/02/17  Add for set cabc */
 	rc = mdss_dsi_parse_dcs_cmds(np, &cabc_off_sequence,
@@ -1920,6 +1951,8 @@ static int mdss_panel_parse_dt(struct device_node *np,
 
 #endif
 
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	rc = mdss_dsi_parse_panel_features(np, ctrl_pdata);
 	if (rc) {
 		pr_err("%s: failed to parse panel features\n", __func__);
@@ -1928,6 +1961,11 @@ static int mdss_panel_parse_dt(struct device_node *np,
 
 	mdss_dsi_parse_panel_horizintal_line_idle(np, ctrl_pdata);
 
+<<<<<<< HEAD
+=======
+	mdss_livedisplay_parse_dt(np, pinfo);
+
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	return 0;
 
 error:

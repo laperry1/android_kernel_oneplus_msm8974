@@ -70,6 +70,13 @@
 #define CURRENT_MODE_INIT AUTO_MODE;
 #endif
 
+<<<<<<< HEAD
+=======
+#if defined(CONFIG_THUMB2_KERNEL) || defined(CONFIG_ARCH_MSM8974)
+#define SWP_OFF
+#endif
+
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 static int current_mode = CURRENT_MODE_INIT;
 
 static int is_hw_lock_type;
@@ -146,7 +153,11 @@ static int __raw_remote_dek_spin_owner(raw_remote_spinlock_t *lock)
 }
 /* end dekkers implementation ----------------------------------------------- */
 
+<<<<<<< HEAD
 #ifndef CONFIG_THUMB2_KERNEL
+=======
+#ifndef SWP_OFF
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 /* swp implementation ------------------------------------------------------- */
 static void __raw_remote_swp_spin_lock(raw_remote_spinlock_t *lock)
 {
@@ -457,7 +468,11 @@ static void initialize_ops(void)
 		current_ops.owner = __raw_remote_dek_spin_owner;
 		is_hw_lock_type = 0;
 		break;
+<<<<<<< HEAD
 #ifndef CONFIG_THUMB2_KERNEL
+=======
+#ifndef SWP_OFF
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	case SWP_MODE:
 		current_ops.lock = __raw_remote_swp_spin_lock;
 		current_ops.unlock = __raw_remote_swp_spin_unlock;

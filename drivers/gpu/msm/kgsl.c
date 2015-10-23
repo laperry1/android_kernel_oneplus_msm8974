@@ -248,7 +248,12 @@ kgsl_mem_entry_destroy(struct kref *kref)
 	kgsl_mem_entry_detach_process(entry);
 
 	if (entry->memtype != KGSL_MEM_ENTRY_KERNEL)
+<<<<<<< HEAD
 		kgsl_driver.stats.mapped -= entry->memdesc.size;
+=======
+		atomic_sub(entry->memdesc.size,
+			&kgsl_driver.stats.mapped);
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 	/*
 	 * Ion takes care of freeing the sglist for us so
@@ -3040,8 +3045,13 @@ static long kgsl_ioctl_map_user_mem(struct kgsl_device_private *dev_priv,
 	/* Adjust the returned value for a non 4k aligned offset */
 	param->gpuaddr = entry->memdesc.gpuaddr + (param->offset & ~PAGE_MASK);
 
+<<<<<<< HEAD
 	KGSL_STATS_ADD(param->len, kgsl_driver.stats.mapped,
 		kgsl_driver.stats.mapped_max);
+=======
+	KGSL_STATS_ADD(param->len, &kgsl_driver.stats.mapped,
+		&kgsl_driver.stats.mapped_max);
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 	kgsl_process_add_stats(private, entry->memtype, param->len);
 
@@ -4086,6 +4096,18 @@ struct kgsl_driver kgsl_driver  = {
 	 * 8064 and 8974 once the region to be flushed is > 16mb.
 	 */
 	.full_cache_threshold = SZ_16M,
+<<<<<<< HEAD
+=======
+
+	.stats.vmalloc = ATOMIC_INIT(0),
+	.stats.vmalloc_max = ATOMIC_INIT(0),
+	.stats.page_alloc = ATOMIC_INIT(0),
+	.stats.page_alloc_max = ATOMIC_INIT(0),
+	.stats.coherent = ATOMIC_INIT(0),
+	.stats.coherent_max = ATOMIC_INIT(0),
+	.stats.mapped = ATOMIC_INIT(0),
+	.stats.mapped_max = ATOMIC_INIT(0),
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 };
 EXPORT_SYMBOL(kgsl_driver);
 

@@ -12,7 +12,10 @@
 
 /include/ "msm8974-oppo-panel.dtsi"
 /include/ "msm8974-oppo-camera-sensor.dtsi"
+<<<<<<< HEAD
 /include/ "../msm8974-leds.dtsi"
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 / {
 	aliases {
@@ -62,6 +65,7 @@
 		status = "disabled";
 	};
 
+<<<<<<< HEAD
 	i2c@f9967000 {
 		isa1200@48 {
 			status = "okay";
@@ -85,10 +89,13 @@
 		};
 	};
 
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	gpio_keys {
 		compatible = "gpio-keys";
 		input-name = "gpio-keys";
 		status = "ok";
+<<<<<<< HEAD
 		camera_snapshot {
 			label = "camera_snapshot";
 			gpios = <&pm8941_gpios 3 0x1>;
@@ -106,6 +113,8 @@
 			gpio-key,wakeup;
 			debounce-interval = <15>;
 		};
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 		vol_up {
 			label = "volume_up";
@@ -137,6 +146,7 @@
 		};
 	};
 
+<<<<<<< HEAD
 	spi@f9923000 {
 		ethernet-switch@2 {
 			compatible = "micrel,ks8851";
@@ -150,12 +160,15 @@
 		};
 	};
 
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	sound {
 		qcom,model = "msm8974-taiko-mtp-snd-card";
 		qcom,cdc-micbias2-headset-only;
 	};
 };
 
+<<<<<<< HEAD
 &pm8941_lsid1 {
 	qcom,leds@d800 {
 		status = "disabled";
@@ -221,6 +234,8 @@
 	};
 };
 
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 &sdhc_1 {
 	vdd-supply = <&pm8941_l20>;
 	vdd-io-supply = <&pm8941_s3>;
@@ -627,6 +642,7 @@
 		qcom,master-en = <1>;
 	};
 };
+<<<<<<< HEAD
 
 &spi_epm {
 	epm-adc@0 {
@@ -646,3 +662,5 @@
 		qcom,channel-type = <0x1540>;
 	};
 };
+=======
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd

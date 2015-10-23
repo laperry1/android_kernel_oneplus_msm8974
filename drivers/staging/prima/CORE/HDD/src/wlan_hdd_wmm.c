@@ -876,7 +876,11 @@ static eHalStatus hdd_wmm_sme_callback (tHalHandle hHal,
       VOS_TRACE( VOS_MODULE_ID_HDD, WMM_TRACE_LEVEL_ERROR,
                  "%s: Setup failed, not a QoS AP",
                  __func__);
+<<<<<<< HEAD
       if ((!HDD_WMM_HANDLE_IMPLICIT) == pQosContext->handle)
+=======
+      if (!HDD_WMM_HANDLE_IMPLICIT == pQosContext->handle)
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
       {
          VOS_TRACE(VOS_MODULE_ID_HDD, WMM_TRACE_LEVEL_INFO,
                    "%s: Explicit Qos, notifying userspace",
@@ -1979,7 +1983,11 @@ v_U16_t hdd_wmm_select_queue(struct net_device * dev, struct sk_buff *skb)
    v_USHORT_t queueIndex;
    hdd_adapter_t *pAdapter =  WLAN_HDD_GET_PRIV_PTR(dev);
 
+<<<<<<< HEAD
    if (vos_is_logp_in_progress(VOS_MODULE_ID_HDD, NULL)) {
+=======
+   if (isWDresetInProgress()) {
+>>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
        VOS_TRACE( VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_WARN,
                   FL("called during WDReset"));
        skb->priority = SME_QOS_WMM_UP_BE;
