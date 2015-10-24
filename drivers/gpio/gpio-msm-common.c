@@ -25,10 +25,7 @@
 #include <linux/err.h>
 #include <linux/platform_device.h>
 #include <linux/slab.h>
-<<<<<<< HEAD
-=======
 #include <linux/wakeup_reason.h>
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 #include <asm/mach/irq.h>
 
@@ -448,12 +445,7 @@ void msm_gpio_show_resume_irq(void)
 		intstat = __msm_gpio_get_intr_status(i);
 		if (intstat) {
 			irq = msm_gpio_to_irq(&msm_gpio.gpio_chip, i);
-<<<<<<< HEAD
-			pr_warning("%s: %d triggered\n",
-				__func__, irq);
-=======
 			log_base_wakeup_reason(irq);
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		}
 	}
 	spin_unlock_irqrestore(&tlmm_lock, irq_flags);

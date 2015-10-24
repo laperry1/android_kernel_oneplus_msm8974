@@ -215,13 +215,10 @@ extern struct property *of_find_property(const struct device_node *np,
 extern int of_property_read_u32_index(const struct device_node *np,
 				       const char *propname,
 				       u32 index, u32 *out_value);
-<<<<<<< HEAD
-=======
 extern int of_property_read_u8_array(const struct device_node *np,
 			const char *propname, u8 *out_values, size_t sz);
 extern int of_property_read_u16_array(const struct device_node *np,
 			const char *propname, u16 *out_values, size_t sz);
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 extern int of_property_read_u32_array(const struct device_node *np,
 				      const char *propname,
 				      u32 *out_values,
@@ -316,8 +313,6 @@ static inline int of_property_read_u32_index(const struct device_node *np,
 	return -ENOSYS;
 }
 
-<<<<<<< HEAD
-=======
 static inline int of_property_read_u8_array(const struct device_node *np,
 			const char *propname, u8 *out_values, size_t sz)
 {
@@ -330,7 +325,6 @@ static inline int of_property_read_u16_array(const struct device_node *np,
 	return -ENOSYS;
 }
 
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 static inline int of_property_read_u32_array(const struct device_node *np,
 					     const char *propname,
 					     u32 *out_values, size_t sz)
@@ -408,8 +402,6 @@ static inline bool of_property_read_bool(const struct device_node *np,
 	return prop ? true : false;
 }
 
-<<<<<<< HEAD
-=======
 static inline int of_property_read_u8(const struct device_node *np,
 				       const char *propname,
 				       u8 *out_value)
@@ -424,7 +416,6 @@ static inline int of_property_read_u16(const struct device_node *np,
 	return of_property_read_u16_array(np, propname, out_value, 1);
 }
 
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 static inline int of_property_read_u32(const struct device_node *np,
 				       const char *propname,
 				       u32 *out_value)

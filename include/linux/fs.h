@@ -332,10 +332,7 @@ struct inodes_stat_t {
 #define FIFREEZE	_IOWR('X', 119, int)	/* Freeze */
 #define FITHAW		_IOWR('X', 120, int)	/* Thaw */
 #define FITRIM		_IOWR('X', 121, struct fstrim_range)	/* Trim */
-<<<<<<< HEAD
-=======
 #define FS_IOC_SHUTDOWN		_IOR('X', 125, __u32)	/* Shutdown */
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 #define FIDTRIM	_IOWR('f', 128, struct fstrim_range)	/* Deep discard trim */
 
@@ -386,8 +383,6 @@ struct inodes_stat_t {
 #define SYNC_FILE_RANGE_WRITE		2
 #define SYNC_FILE_RANGE_WAIT_AFTER	4
 
-<<<<<<< HEAD
-=======
 /*
  * Flags for going down operation used by FS_IOC_GOINGDOWN
  */
@@ -395,7 +390,6 @@ struct inodes_stat_t {
 #define FS_GOING_DOWN_METASYNC	0x1	/* going down with metadata */
 #define FS_GOING_DOWN_NOSYNC	0x2	/* going down */
 
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 #ifdef __KERNEL__
 
 #include <linux/linkage.h>

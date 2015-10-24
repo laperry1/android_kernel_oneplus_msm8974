@@ -14,10 +14,7 @@
 #include <linux/suspend.h>
 #include <linux/seq_file.h>
 #include <linux/debugfs.h>
-<<<<<<< HEAD
-=======
 #include <linux/types.h>
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 #include <trace/events/power.h>
 
 #include "power.h"
@@ -657,8 +654,6 @@ void pm_wakeup_event(struct device *dev, unsigned int msec)
 }
 EXPORT_SYMBOL_GPL(pm_wakeup_event);
 
-<<<<<<< HEAD
-=======
 void pm_get_active_wakeup_sources(char *pending_wakeup_source, size_t max)
 {
 	struct wakeup_source *ws, *last_active_ws = NULL;
@@ -690,7 +685,6 @@ void pm_get_active_wakeup_sources(char *pending_wakeup_source, size_t max)
 }
 EXPORT_SYMBOL_GPL(pm_get_active_wakeup_sources);
 
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 static void print_active_wakeup_sources(void)
 {
 	struct wakeup_source *ws;

@@ -849,9 +849,6 @@ int mdss_mdp_wb_set_secure(struct msm_fb_data_type *mfd, int enable);
 int mdss_mdp_wb_get_secure(struct msm_fb_data_type *mfd, uint8_t *enable);
 void mdss_mdp_ctl_restore(void);
 int  mdss_mdp_ctl_reset(struct mdss_mdp_ctl *ctl);
-<<<<<<< HEAD
-=======
 int mdss_mdp_user_pcc_config(struct mdp_pcc_cfg_data *config);
 
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 #endif /* MDSS_MDP_H */

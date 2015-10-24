@@ -18,10 +18,7 @@
 #include <linux/workqueue.h>
 #include <linux/kmod.h>
 #include <linux/wakelock.h>
-<<<<<<< HEAD
-=======
 #include <linux/wakeup_reason.h>
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 #include "power.h"
 
 /* 
@@ -40,10 +37,7 @@ static int try_to_freeze_tasks(bool user_only)
 	unsigned int elapsed_msecs;
 	bool wakeup = false;
 	int sleep_usecs = USEC_PER_MSEC;
-<<<<<<< HEAD
-=======
 	char suspend_abort[MAX_SUSPEND_ABORT_LEN];
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 	do_gettimeofday(&start);
 
@@ -84,12 +78,9 @@ static int try_to_freeze_tasks(bool user_only)
 			break;
 
 		if (pm_wakeup_pending()) {
-<<<<<<< HEAD
-=======
 			pm_get_active_wakeup_sources(suspend_abort,
 				MAX_SUSPEND_ABORT_LEN);
 			log_suspend_abort_reason(suspend_abort);
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 			wakeup = true;
 			break;
 		}

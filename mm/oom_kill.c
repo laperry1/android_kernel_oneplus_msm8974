@@ -389,11 +389,7 @@ static struct task_struct *select_bad_process(unsigned int *ppoints,
  *
  * Call with tasklist_lock read-locked.
  */
-<<<<<<< HEAD
-static void dump_tasks(const struct mem_cgroup *memcg, const nodemask_t *nodemask)
-=======
 void dump_tasks(const struct mem_cgroup *memcg, const nodemask_t *nodemask)
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 {
 	struct task_struct *p;
 	struct task_struct *task;

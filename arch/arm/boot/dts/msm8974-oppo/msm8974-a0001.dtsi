@@ -23,8 +23,6 @@
 /include/ "msm8974-a0001-sound.dtsi"
 /include/ "msm8974-oppo-leds.dtsi"
 
-<<<<<<< HEAD
-=======
 &soc {
 	i2c@f9924000 {
 		sn3193_issi_rgb@68 {
@@ -35,32 +33,12 @@
 	};
 };
 
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 &i2c_1 {
 	status = "ok";
 };
 
 &spi_0 {
-<<<<<<< HEAD
-	compatible;
-	reg-names;
-	reg = <>;
-	interrupt-names;
-	interrupts;
-	spi-max-frequency;
-	qcom,gpio-mosi;
-	qcom,gpio-miso;
-	qcom,gpio-clk;
-	qcom,gpio-cs0;
-	qcom,infinite-mode;
-	qcom,use-bam;
-	qcom,ver-reg-exists;
-	qcom,bam-consumer-pipe-index;
-	qcom,bam-producer-pipe-index;
-	qcom,master-id;
-=======
 	status = "disabled";
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 };
 
 &pm8941_boost {

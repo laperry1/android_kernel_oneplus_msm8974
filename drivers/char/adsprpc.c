@@ -333,10 +333,7 @@ static int context_alloc(struct fastrpc_apps *me, uint32_t kernel,
 		goto bail;
 
 	INIT_HLIST_NODE(&ctx->hn);
-<<<<<<< HEAD
-=======
 	hlist_add_fake(&ctx->hn);
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	ctx->pra = (remote_arg_t *)(&ctx[1]);
 	ctx->fds = invokefd->fds == 0 ? 0 : (int *)(&ctx->pra[bufs]);
 	ctx->handles = invokefd->fds == 0 ? 0 :

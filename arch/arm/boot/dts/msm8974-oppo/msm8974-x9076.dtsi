@@ -20,18 +20,6 @@
 /include/ "msm8974-oppo-regulator.dtsi"
 /include/ "msm8974-oppo-sound.dtsi"
 /include/ "msm8974-oppo-leds.dtsi"
-<<<<<<< HEAD
-/include/ "msm8974-x9076-mdss.dtsi"
-
-&soc {
-    i2c@f9923000 {
-        pic16f_fastcg@25{
-            status = "okay";
-            compatible = "microchip,pic16f_fastcg";
-            reg = <0x25>;
-        };
-    };
-=======
 /include/ "msm8974-x9076-leds.dtsi"
 /include/ "msm8974-x9076-mdss.dtsi"
 
@@ -43,7 +31,6 @@
 			reg = <0x25>;
 		};
 	};
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 };
 
 &i2c_1 {
@@ -51,30 +38,5 @@
 };
 
 &spi_0 {
-<<<<<<< HEAD
-	compatible;
-	reg-names;
-	reg = <>;
-	interrupt-names;
-	interrupts;
-	spi-max-frequency;
-	qcom,gpio-mosi;
-	qcom,gpio-miso;
-	qcom,gpio-clk;
-	qcom,gpio-cs0;
-	qcom,infinite-mode;
-	qcom,use-bam;
-	qcom,ver-reg-exists;
-	qcom,bam-consumer-pipe-index;
-	qcom,bam-producer-pipe-index;
-	qcom,master-id;
-};
-
-&pm8941_lsid1 {
-        qcom,leds@d000 {
-                status = "okay";
-        };
-=======
 	status = "disabled";
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 };

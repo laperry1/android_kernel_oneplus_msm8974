@@ -56,17 +56,6 @@
 #define REPORT_2D_Z
 #define REPORT_2D_W
 
-<<<<<<< HEAD
-/*
-#define USE_F12_DATA_15
-*/
-
-/*
-#define IGNORE_FN_INIT_FAILURE
-*/
-
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 char *tp_firmware_strings[TP_TYPE_MAX][LCD_TYPE_MAX] = {
 	{"WINTEK", "WINTEK", "WINTEK"},
 	{"TPK", "TPK", "TPK"}
@@ -125,21 +114,6 @@ static int synaptics_rmi4_reset_device(struct synaptics_rmi4_data *rmi4_data,
 		unsigned short f01_cmd_base_addr);
 static inline void wait_test_cmd_finished(void);
 
-<<<<<<< HEAD
-#ifdef CONFIG_HAS_EARLYSUSPEND
-static ssize_t synaptics_rmi4_full_pm_cycle_show(struct device *dev,
-		struct device_attribute *attr, char *buf);
-
-static ssize_t synaptics_rmi4_full_pm_cycle_store(struct device *dev,
-		struct device_attribute *attr, const char *buf, size_t count);
-
-static void synaptics_rmi4_early_suspend(struct early_suspend *h);
-
-static void synaptics_rmi4_late_resume(struct early_suspend *h);
-#endif
-
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 static int synaptics_rmi4_suspend(struct device *dev);
 
 static int synaptics_rmi4_resume(struct device *dev);
@@ -396,14 +370,6 @@ static ssize_t synaptics_attr_loglevel_show(struct device *dev,
 		struct device_attribute *attr, char *buf);
 
 static struct device_attribute attrs[] = {
-<<<<<<< HEAD
-#ifdef CONFIG_HAS_EARLYSUSPEND
-	__ATTR(full_pm_cycle, (S_IRUGO | S_IWUSR),
-			synaptics_rmi4_full_pm_cycle_show,
-			synaptics_rmi4_full_pm_cycle_store),
-#endif
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	__ATTR(reset, S_IWUSR,
 			synaptics_rmi4_show_error,
 			synaptics_rmi4_f01_reset_store),
@@ -439,34 +405,6 @@ static struct device_attribute attrs[] = {
 			synaptics_rmi4_open_or_close_holster_mode_store),
 };
 
-<<<<<<< HEAD
-#ifdef CONFIG_HAS_EARLYSUSPEND
-static ssize_t synaptics_rmi4_full_pm_cycle_show(struct device *dev,
-		struct device_attribute *attr, char *buf)
-{
-	struct synaptics_rmi4_data *rmi4_data = dev_get_drvdata(dev);
-
-	return snprintf(buf, PAGE_SIZE, "%u\n",
-			rmi4_data->full_pm_cycle);
-}
-
-static ssize_t synaptics_rmi4_full_pm_cycle_store(struct device *dev,
-		struct device_attribute *attr, const char *buf, size_t count)
-{
-	unsigned int input;
-	struct synaptics_rmi4_data *rmi4_data = dev_get_drvdata(dev);
-
-	if (sscanf(buf, "%u", &input) != 1)
-		return -EINVAL;
-
-	rmi4_data->full_pm_cycle = input > 0 ? 1 : 0;
-
-	return count;
-}
-#endif
-
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 static ssize_t synaptics_rmi4_f01_reset_store(struct device *dev,
 		struct device_attribute *attr, const char *buf, size_t count)
 {
@@ -1101,11 +1039,7 @@ static void vk_calculate_area(void)  //added by liujun
 	printk("[syna]maxx=%d,maxy=%d,vkh=%d\n",syna_ts_data->sensor_max_x,syna_ts_data->sensor_max_y,syna_ts_data->virtual_key_height);
 
 	syna_ts_data->vk_prop_width = LCD_MULTI_RATIO(190);
-<<<<<<< HEAD
-	if (get_pcb_version() <= HW_VERSION__20) {
-=======
 	if (get_pcb_version() < HW_VERSION__20) {
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		syna_ts_data->vk_prop_center_y = LCD_MULTI_RATIO(1974);
 		syna_ts_data->vk_prop_height = LCD_MULTI_RATIO(120);
 	} else {
@@ -1185,11 +1119,7 @@ static int get_virtual_key_button(int x, int y)
 	int i;
 	int lcdheight = LCD_MAX_Y;
 
-<<<<<<< HEAD
-	if (get_pcb_version() > HW_VERSION__20)
-=======
 	if (get_pcb_version() >= HW_VERSION__20)
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		lcdheight = LCD_MAX_Y_FIND7S;
 
 	if (y <= lcdheight)
@@ -2104,11 +2034,7 @@ static ssize_t synaptics_rmi4_baseline_data(char *buf, bool savefile)
 	num_read_chars += sprintf(&(buf[num_read_chars]), " trx-to-trx raw readback: %x  %x  %x  %x  %x  %x \n", data_buf[0], data_buf[1], data_buf[2], data_buf[3], data_buf[4], data_buf[5]);
 #ifdef CONFIG_MACH_FIND7
 	//mingqiang.guo@phone.bsp 2014-5-30  modify  must clear not use channel , other it will wrong
-<<<<<<< HEAD
-	if (get_pcb_version() <= HW_VERSION__20) { //find7
-=======
 	if (get_pcb_version() < HW_VERSION__20) { //find7
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		if ((data_buf[0] == 0) && (data_buf[1] == 0) && (data_buf[2] == 0)
 			&& ((data_buf[3] & 0x0f) == 0) && ((data_buf[5] & 0x7f) == 0)) {
 			if ((syna_ts_data->vendor_id == TP_VENDOR_TPK) && (data_buf[4] == 0))
@@ -2181,11 +2107,7 @@ static ssize_t synaptics_rmi4_baseline_data(char *buf, bool savefile)
 	//mingqiang.guo@phone.bsp modify  only 13077 wintk and tpk use different channels,  tpk: data_buf[4]==0xff wintek :  data_buf[4]==0xfe
 	print_ts(TS_DEBUG, "%d: syna_ts_data->vendor_id=%d,data_buf[4]=%d\n", __LINE__, syna_ts_data->vendor_id, data_buf[4]);
 
-<<<<<<< HEAD
-	if (get_pcb_version() <= HW_VERSION__20) { //find7
-=======
 	if (get_pcb_version() < HW_VERSION__20) { //find7
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		if ((data_buf[0] == 0xff) && (data_buf[1] == 0xff) && (data_buf[2] == 0xff)
 			&& ((data_buf[3] & 0x0f) == 0x0f)  && ((data_buf[5] & 0x7f) == 0x7f)) {
 			if ((syna_ts_data->vendor_id == TP_VENDOR_TPK) && (data_buf[4] == 0xff))
@@ -2561,47 +2483,6 @@ static int synaptics_rmi4_f12_abs_report(struct synaptics_rmi4_data *rmi4_data,
 	extra_data = (struct synaptics_rmi4_f12_extra_data *)fhandler->extra;
 	size_of_2d_data = sizeof(struct synaptics_rmi4_f12_finger_data);
 
-<<<<<<< HEAD
-#ifdef USE_F12_DATA_15
-	/* Determine the total number of fingers to process */
-	if (extra_data->data15_size) {
-		retval = synaptics_rmi4_i2c_read(rmi4_data,
-				data_addr + extra_data->data15_offset,
-				extra_data->data15_data,
-				extra_data->data15_size);
-		if (retval < 0)
-			return 0;
-
-		/* Start checking from the highest bit */
-		temp = extra_data->data15_size - 1; /* Highest byte */
-		finger = (fingers_to_process - 1) % 8; /* Highest bit */
-		do {
-			if (extra_data->data15_data[temp] & (1 << finger))
-				break;
-
-			if (finger) {
-				finger--;
-			} else {
-				temp--; /* Move to the next lower byte */
-				finger = 7;
-			}
-
-			fingers_to_process--;
-		} while (fingers_to_process);
-
-		dev_dbg(&rmi4_data->i2c_client->dev,
-				"%s: Number of fingers to process = %d\n",
-				__func__, fingers_to_process);
-	}
-
-	if (!fingers_to_process) {
-		synaptics_rmi4_free_fingers(rmi4_data);
-		return 0;
-	}
-#endif
-
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	if (atomic_read(&rmi4_data->syna_use_gesture)) {
 		retval = synaptics_rmi4_i2c_read(rmi4_data,
 				SYNA_ADDR_GESTURE_OFFSET,
@@ -3814,16 +3695,7 @@ rescan_pdt:
 					retval = synaptics_rmi4_f1a_init(rmi4_data,
 							fhandler, &rmi_fd, intr_count);
 					if (retval < 0) {
-<<<<<<< HEAD
-#ifdef IGNORE_FN_INIT_FAILURE
-						kfree(fhandler);
-						fhandler = NULL;
-#else
 						return retval;
-#endif
-=======
-						return retval;
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 					}
 					break;
 				case SYNAPTICS_RMI4_F54:
@@ -4350,11 +4222,7 @@ static void synaptics_rmi4_get_vendorid(struct synaptics_rmi4_data *rmi4_data) {
 	vendor_id = synaptics_rmi4_get_vendorid1(gpio_get_value(rmi4_data->id_gpio),
 			gpio_get_value(rmi4_data->wakeup_gpio), 0);
 #else
-<<<<<<< HEAD
-	if (get_pcb_version() >= HW_VERSION__21)
-=======
 	if (get_pcb_version() >= HW_VERSION__20)
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		vendor_id = synaptics_rmi4_get_vendorid1(gpio_get_value(rmi4_data->id_gpio),
 				gpio_get_value(rmi4_data->wakeup_gpio), 0);
 	else
@@ -4459,21 +4327,12 @@ static int __devinit synaptics_rmi4_probe(struct i2c_client *client,
 	rmi4_data->reset_device = synaptics_rmi4_reset_device;
 
 	//init sensor size
-<<<<<<< HEAD
-	if (get_pcb_version() <= HW_VERSION__20) {
-=======
 	if (get_pcb_version() < HW_VERSION__20) {
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		rmi4_data->virtual_key_height = 114;
 		rmi4_data->sensor_max_x = LCD_MAX_X;
 		rmi4_data->sensor_max_y = LCD_MAX_Y+120;
 		syna_lcd_ratio1 = 100;
 		syna_lcd_ratio2 = 100;
-<<<<<<< HEAD
-		if (get_pcb_version() == HW_VERSION__20)
-			syna_lcd_ratio1 = 135;
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	} else {
 		rmi4_data->virtual_key_height = 142;
 		rmi4_data->sensor_max_x = LCD_MAX_X_FIND7S;
@@ -4524,16 +4383,6 @@ static int __devinit synaptics_rmi4_probe(struct i2c_client *client,
 		goto err_set_input_dev;
 	}
 
-<<<<<<< HEAD
-#ifdef CONFIG_HAS_EARLYSUSPEND
-	rmi4_data->early_suspend.level = EARLY_SUSPEND_LEVEL_BLANK_SCREEN + 1;
-	rmi4_data->early_suspend.suspend = synaptics_rmi4_early_suspend;
-	rmi4_data->early_suspend.resume = synaptics_rmi4_late_resume;
-	register_early_suspend(&rmi4_data->early_suspend);
-#endif
-
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 #ifdef CONFIG_FB   //for tp suspend and resume
 	mutex_init(&rmi4_data->ops_lock);
 
@@ -4644,12 +4493,6 @@ err_gpio_reset:
 err_gpio_attn:
 	synaptics_rmi4_empty_fn_list(rmi4_data);
 
-<<<<<<< HEAD
-#ifdef CONFIG_HAS_EARLYSUSPEND
-	unregister_early_suspend(&rmi4_data->early_suspend);
-#endif
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	input_unregister_device(rmi4_data->input_dev);
 	rmi4_data->input_dev = NULL;
 
@@ -4705,12 +4548,6 @@ static int __devexit synaptics_rmi4_remove(struct i2c_client *client)
 
 	synaptics_rmi4_empty_fn_list(rmi4_data);
 
-<<<<<<< HEAD
-#ifdef CONFIG_HAS_EARLYSUSPEND
-	unregister_early_suspend(&rmi4_data->early_suspend);
-#endif
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	input_unregister_device(rmi4_data->input_dev);
 
 	if (platform_data->regulator_en) {
@@ -4811,77 +4648,6 @@ static void synaptics_rmi4_sensor_wake(struct synaptics_rmi4_data *rmi4_data)
 	}
 }
 
-<<<<<<< HEAD
-#ifdef CONFIG_HAS_EARLYSUSPEND
-/**
- * synaptics_rmi4_early_suspend()
- *
- * Called by the kernel during the early suspend phase when the system
- * enters suspend.
- *
- * This function calls synaptics_rmi4_sensor_sleep() to stop finger
- * data acquisition and put the sensor to sleep.
- */
-static void synaptics_rmi4_early_suspend(struct early_suspend *h)
-{
-	struct synaptics_rmi4_data *rmi4_data =
-		container_of(h, struct synaptics_rmi4_data,
-				early_suspend);
-
-	if (rmi4_data->stay_awake) {
-		rmi4_data->staying_awake = true;
-		return;
-	} else {
-		rmi4_data->staying_awake = false;
-	}
-
-	rmi4_data->touch_stopped = true;
-	synaptics_rmi4_irq_enable(rmi4_data, false);
-	synaptics_rmi4_sensor_sleep(rmi4_data);
-	synaptics_rmi4_free_fingers(rmi4_data);
-
-	if (rmi4_data->full_pm_cycle)
-		synaptics_rmi4_suspend(&(rmi4_data->input_dev->dev));
-}
-
-/**
- * synaptics_rmi4_late_resume()
- *
- * Called by the kernel during the late resume phase when the system
- * wakes up from suspend.
- *
- * This function goes through the sensor wake process if the system wakes
- * up from early suspend (without going into suspend).
- */
-static void synaptics_rmi4_late_resume(struct early_suspend *h)
-{
-	int retval;
-	struct synaptics_rmi4_data *rmi4_data =
-		container_of(h, struct synaptics_rmi4_data,
-				early_suspend);
-
-	if (rmi4_data->staying_awake)
-		return;
-
-	if (rmi4_data->full_pm_cycle)
-		synaptics_rmi4_resume(&(rmi4_data->input_dev->dev));
-
-	if (rmi4_data->sensor_sleep == true) {
-		synaptics_rmi4_sensor_wake(rmi4_data);
-		synaptics_rmi4_irq_enable(rmi4_data, true);
-		rmi4_data->touch_stopped = false;
-		retval = synaptics_rmi4_reinit_device(rmi4_data);
-		if (retval < 0) {
-			dev_err(&rmi4_data->i2c_client->dev,
-					"%s: Failed to reinit device\n",
-					__func__);
-		}
-	}
-}
-#endif
-
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 /**
  * synaptics_rmi4_suspend()
  *
@@ -4940,22 +4706,6 @@ static int synaptics_rmi4_suspend(struct device *dev)
 	return 0;
 }
 
-<<<<<<< HEAD
-#ifdef SYNC_RMI4_PWR
-void synaptics_rmi4_sync_lcd_suspend(void) {
-	if (!syna_rmi4_data)
-		return;
-	synaptics_rmi4_suspend(&syna_rmi4_data->i2c_client->dev);
-}
-void synaptics_rmi4_sync_lcd_resume(void) {
-	if (!syna_rmi4_data)
-		return;
-	synaptics_rmi4_resume(&syna_rmi4_data->i2c_client->dev);
-}
-#endif
-
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 /**
  * synaptics_rmi4_resume()
  *

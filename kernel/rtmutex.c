@@ -68,17 +68,10 @@ static void fixup_rt_mutex_waiters(struct rt_mutex *lock)
 }
 
 /*
-<<<<<<< HEAD
- * We can speed up the acquire/release, if the architecture
- * supports cmpxchg and if there's no debugging state to be set up
- */
-#if defined(__HAVE_ARCH_CMPXCHG) && !defined(CONFIG_DEBUG_RT_MUTEXES)
-=======
  * We can speed up the acquire/release, if there's no debugging  state to be
  * set up.
  */
 #ifndef CONFIG_DEBUG_RT_MUTEXES
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 # define rt_mutex_cmpxchg(l,c,n)	(cmpxchg(&l->owner, c, n) == c)
 static inline void mark_rt_mutex_waiters(struct rt_mutex *lock)
 {

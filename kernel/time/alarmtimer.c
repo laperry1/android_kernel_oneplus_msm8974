@@ -26,11 +26,8 @@
 #include <linux/workqueue.h>
 #include <linux/freezer.h>
 
-<<<<<<< HEAD
-=======
 #define ALARM_DELTA 120
 
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 /**
  * struct alarm_base - Alarm timer bases
  * @lock:		Lock for syncrhonized access to the base
@@ -80,11 +77,7 @@ void power_on_alarm_init(void)
 	rtc_tm_to_time(&rt, &alarm_time);
 
 	if (alarm_time)
-<<<<<<< HEAD
-		power_on_alarm = alarm_time;
-=======
 		power_on_alarm = alarm_time + ALARM_DELTA;
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	else
 		power_on_alarm = 0;
 }
@@ -124,13 +117,9 @@ void set_power_on_alarm(long secs, bool enable)
 	 *to power up the device before actual alarm
 	 *expiration
 	 */
-<<<<<<< HEAD
-	if (alarm_time <= rtc_secs)
-=======
 	if ((alarm_time - ALARM_DELTA) > rtc_secs)
 		alarm_time -= ALARM_DELTA;
 	else
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		goto disable_alarm;
 
 	rtc_time_to_tm(alarm_time, &alarm.time);

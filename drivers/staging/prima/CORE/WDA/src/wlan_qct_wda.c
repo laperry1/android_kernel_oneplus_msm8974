@@ -6090,20 +6090,12 @@ void WDA_AddBASessionReqCallback(
    vos_mem_free(pWdaParams->wdaWdiApiMsgParam) ;
    vos_mem_free(pWdaParams);
    /* 
-<<<<<<< HEAD
-    * if BA direction is for recipient, update TL with BA session params and send
-=======
     * if WDA in update TL state, update TL with BA session parama and send
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
     * another request to HAL(/WDI) (ADD_BA_REQ)
     */
    if((VOS_STATUS_SUCCESS == 
                        CONVERT_WDI2VOS_STATUS(wdiAddBaSession->wdiStatus)) && 
-<<<<<<< HEAD
-                                 (eBA_RECIPIENT == pAddBAReqParams->baDirection))
-=======
                                  (WDA_BA_UPDATE_TL_STATE == pWDA->wdaState))
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
    {
       /* Update TL with BA info received from HAL/WDI */
       status =  WDA_TL_BA_SESSION_ADD(pWDA->pVosContext,
@@ -6189,15 +6181,11 @@ VOS_STATUS WDA_ProcessAddBASessionReq(tWDA_CbContext *pWDA,
       wdiBAInfoType->usBaTimeout = pAddBAReqParams->baTimeout;
       wdiBAInfoType->usBaSSN = pAddBAReqParams->baSSN;
       wdiBAInfoType->ucBaDirection = pAddBAReqParams->baDirection;
-<<<<<<< HEAD
-
-=======
       /* check the BA direction and update state accordingly */
       (eBA_RECIPIENT == wdiBAInfoType->ucBaDirection) 
                                  ? (pWDA->wdaState = WDA_BA_UPDATE_TL_STATE)
                                  : (pWDA->wdaState = WDA_BA_UPDATE_LIM_STATE);
  
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
    }while(0) ;
    wdiAddBASessionReqParam->wdiReqStatusCB = NULL ;
    pWdaParams->pWdaContext = pWDA;

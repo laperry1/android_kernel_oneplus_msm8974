@@ -10,11 +10,8 @@
 #include <linux/mutex.h>
 #include <linux/module.h>
 #include <linux/interrupt.h>
-<<<<<<< HEAD
-=======
 #include <linux/wakeup_reason.h>
 #include <linux/irq.h>
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 static LIST_HEAD(syscore_ops_list);
 static DEFINE_MUTEX(syscore_ops_lock);
@@ -78,11 +75,8 @@ int syscore_suspend(void)
 	return 0;
 
  err_out:
-<<<<<<< HEAD
-=======
 	log_suspend_abort_reason("System core suspend callback %pF failed",
 		ops->suspend);
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	pr_err("PM: System core suspend callback %pF failed.\n", ops->suspend);
 
 	list_for_each_entry_continue(ops, &syscore_ops_list, node)

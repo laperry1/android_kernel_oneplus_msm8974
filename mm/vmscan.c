@@ -776,11 +776,7 @@ static unsigned long shrink_page_list(struct list_head *page_list,
 		struct address_space *mapping;
 		struct page *page;
 		int may_enter_fs;
-<<<<<<< HEAD
-		enum page_references references = PAGEREF_RECLAIM_CLEAN;
-=======
 		enum page_references references = PAGEREF_RECLAIM;
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 		cond_resched();
 
@@ -1024,11 +1020,8 @@ unsigned long reclaim_clean_pages_from_list(struct zone *zone,
 		.gfp_mask = GFP_KERNEL,
 		.priority = DEF_PRIORITY,
 		.may_unmap = 1,
-<<<<<<< HEAD
-=======
 		/* Doesn't allow to write out dirty page */
 		.may_writepage = 0,
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	};
 	unsigned long ret, dummy1, dummy2;
 	struct page *page, *next;

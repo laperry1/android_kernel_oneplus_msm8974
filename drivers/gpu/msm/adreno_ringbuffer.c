@@ -213,11 +213,7 @@ err:
  *
  * Load the pm4 ucode from @start at @addr.
  */
-<<<<<<< HEAD
-static int adreno_ringbuffer_load_pm4_ucode(struct kgsl_device *device,
-=======
 inline int adreno_ringbuffer_load_pm4_ucode(struct kgsl_device *device,
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 			unsigned int start, unsigned int end, unsigned int addr)
 {
 	struct adreno_device *adreno_dev = ADRENO_DEVICE(device);
@@ -271,11 +267,7 @@ err:
  *
  * Load the pfp ucode from @start at @addr.
  */
-<<<<<<< HEAD
-static int adreno_ringbuffer_load_pfp_ucode(struct kgsl_device *device,
-=======
 inline int adreno_ringbuffer_load_pfp_ucode(struct kgsl_device *device,
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 			unsigned int start, unsigned int end, unsigned int addr)
 {
 	struct adreno_device *adreno_dev = ADRENO_DEVICE(device);

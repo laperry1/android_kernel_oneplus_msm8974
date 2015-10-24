@@ -1160,10 +1160,6 @@ struct hfi_device {
 			int *domain_num, int *partition_num);
 	int (*load_fw)(void *dev);
 	void (*unload_fw)(void *dev);
-<<<<<<< HEAD
-	int (*resurrect_fw)(void *dev);
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	int (*get_fw_info)(void *dev, struct hal_fw_info *fw_info);
 	int (*get_info) (void *dev, enum dev_info info);
 	int (*get_stride_scanline)(int color_fmt, int width,

@@ -124,10 +124,7 @@ obj-$(CONFIG_DEBUG_FS)		+= debugfs/
 obj-$(CONFIG_OCFS2_FS)		+= ocfs2/
 obj-$(CONFIG_BTRFS_FS)		+= btrfs/
 obj-$(CONFIG_GFS2_FS)           += gfs2/
-<<<<<<< HEAD
-=======
 obj-$(CONFIG_F2FS_FS)		+= f2fs/
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 obj-y				+= exofs/ # Multiple modules
 obj-$(CONFIG_CEPH_FS)		+= ceph/
 obj-$(CONFIG_PSTORE)		+= pstore/

@@ -27,19 +27,12 @@
  *
  * Handles spurious and unhandled IRQ's. It also prints a debugmessage.
  */
-<<<<<<< HEAD
-void handle_bad_irq(unsigned int irq, struct irq_desc *desc)
-=======
 bool handle_bad_irq(unsigned int irq, struct irq_desc *desc)
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 {
 	print_irq_desc(irq, desc);
 	kstat_incr_irqs_this_cpu(irq, desc);
 	ack_bad_irq(irq);
-<<<<<<< HEAD
-=======
 	return true;
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 }
 
 /*

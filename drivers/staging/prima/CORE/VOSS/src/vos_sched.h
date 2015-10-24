@@ -499,10 +499,7 @@ void clearWlanResetReason(void);
 void vos_timer_module_init( void );
 VOS_STATUS vos_watchdog_wlan_shutdown(void);
 VOS_STATUS vos_watchdog_wlan_re_init(void);
-<<<<<<< HEAD
-=======
 v_BOOL_t isWDresetInProgress(void);
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 v_BOOL_t isSsrPanicOnFailure(void);
 void vos_ssr_protect(const char *caller_func);
 void vos_ssr_unprotect(const char *caller_func);

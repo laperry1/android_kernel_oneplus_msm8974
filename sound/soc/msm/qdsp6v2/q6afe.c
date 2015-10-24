@@ -1978,11 +1978,7 @@ int q6afe_audio_client_buf_alloc_contiguous(unsigned int dir,
 	ac->port[dir].buf = buf;
 
 	rc = msm_audio_ion_alloc("afe_client", &buf[0].client,
-<<<<<<< HEAD
-				&buf[0].handle, bufsz*bufcnt,
-=======
 				&buf[0].handle, PAGE_ALIGN(bufsz*bufcnt),
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 				(ion_phys_addr_t *)&buf[0].phys, (size_t *)&len,
 				&buf[0].data);
 	if (rc) {
@@ -2030,11 +2026,7 @@ int afe_memory_map(u32 dma_addr_p, u32 dma_buf_sz, struct afe_audio_client *ac)
 
 	mutex_lock(&this_afe.afe_cmd_lock);
 	ac->mem_map_handle = 0;
-<<<<<<< HEAD
-	ret = afe_cmd_memory_map(dma_addr_p, dma_buf_sz);
-=======
 	ret = afe_cmd_memory_map(dma_addr_p, PAGE_ALIGN(dma_buf_sz));
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	if (ret < 0) {
 		pr_err("%s: afe_cmd_memory_map failed. error = %d\n",
 		       __func__, ret);
@@ -2263,14 +2255,11 @@ int afe_cmd_memory_unmap(u32 mem_map_handle)
 
 	pr_debug("%s: handle 0x%x\n", __func__, mem_map_handle);
 
-<<<<<<< HEAD
-=======
 	if (!mem_map_handle) {
 		pr_err("%s: mem map handle (null)\n", __func__);
 		return -EINVAL;
 	}
 
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	if (this_afe.apr == NULL) {
 		this_afe.apr = apr_register("ADSP", "AFE", afe_callback,
 					0xFFFFFFFF, &this_afe);
@@ -2314,14 +2303,11 @@ int afe_cmd_memory_unmap_nowait(u32 mem_map_handle)
 
 	pr_debug("%s: handle 0x%x\n", __func__, mem_map_handle);
 
-<<<<<<< HEAD
-=======
 	if (!mem_map_handle) {
 		pr_err("%s: mem map handle (null)\n", __func__);
 		return -EINVAL;
 	}
 
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	if (this_afe.apr == NULL) {
 		this_afe.apr = apr_register("ADSP", "AFE", afe_callback,
 					0xFFFFFFFF, &this_afe);

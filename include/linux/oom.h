@@ -67,12 +67,9 @@ static inline void oom_killer_enable(void)
 
 extern struct task_struct *find_lock_task_mm(struct task_struct *p);
 
-<<<<<<< HEAD
-=======
 extern void dump_tasks(const struct mem_cgroup *memcg,
 		const nodemask_t *nodemask);
 
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 /* sysctls */
 extern int sysctl_oom_dump_tasks;
 extern int sysctl_oom_kill_allocating_task;

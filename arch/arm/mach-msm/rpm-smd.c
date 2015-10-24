@@ -884,20 +884,13 @@ static void msm_rpm_smd_work(struct work_struct *work)
 {
 	uint32_t msg_id;
 	int errno;
-<<<<<<< HEAD
-=======
 	unsigned long flags;
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	char buf[MAX_ERR_BUFFER_SIZE] = {0};
 
 	while (1) {
 		wait_for_completion_interruptible(&data_ready);
 
-<<<<<<< HEAD
-		spin_lock(&msm_rpm_data.smd_lock_read);
-=======
 		spin_lock_irqsave(&msm_rpm_data.smd_lock_read, flags);
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		while (smd_is_pkt_avail(msm_rpm_data.ch_info)) {
 			if (msm_rpm_read_smd_data(buf))
 				break;
@@ -905,11 +898,7 @@ static void msm_rpm_smd_work(struct work_struct *work)
 			errno = msm_rpm_get_error_from_ack(buf);
 			msm_rpm_process_ack(msg_id, errno);
 		}
-<<<<<<< HEAD
-		spin_unlock(&msm_rpm_data.smd_lock_read);
-=======
 		spin_unlock_irqrestore(&msm_rpm_data.smd_lock_read, flags);
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	}
 }
 

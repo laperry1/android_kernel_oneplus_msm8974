@@ -21,16 +21,6 @@
 #include <linux/delay.h>
 #include <mach/msm_bus.h>
 #include <mach/msm_bus_board.h>
-<<<<<<< HEAD
-#ifdef CONFIG_LCD_KCAL
-#include <mach/kcal.h>
-extern int g_kcal_r;
-extern int g_kcal_g;
-extern int g_kcal_b;
-extern struct kcal_data kcal_value;
-#endif
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 struct mdp_csc_cfg mdp_csc_convert[MDSS_MDP_MAX_CSC] = {
 	[MDSS_MDP_CSC_RGB2RGB] = {
@@ -332,11 +322,8 @@ struct mdss_pp_res_type {
 	struct pp_sts_type pp_disp_sts[MDSS_MAX_MIXER_DISP_NUM];
 	/* physical info */
 	struct pp_hist_col_info dspp_hist[MDSS_MDP_MAX_DSPP];
-<<<<<<< HEAD
-=======
 	struct mdp_pcc_cfg_data raw_pcc_disp_cfg[MDSS_BLOCK_DISP_NUM];
 	struct mdp_pcc_cfg_data user_pcc_disp_cfg[MDSS_BLOCK_DISP_NUM];
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 };
 
 static DEFINE_MUTEX(mdss_pp_mutex);
@@ -1967,15 +1954,6 @@ int mdss_mdp_pp_init(struct device *dev)
 			init_completion(&vig[i].pp_res.hist.first_kick);
 		}
 	}
-<<<<<<< HEAD
-#ifdef CONFIG_LCD_KCAL
-	if (!ret) {
-		mdss_mdp_pp_argc();
-		update_preset_lcdc_lut();
-	}
-#endif
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	mutex_unlock(&mdss_pp_mutex);
 	return ret;
 }
@@ -2370,8 +2348,6 @@ static void pp_update_pcc_regs(char __iomem *addr,
 	writel_relaxed(cfg_ptr->b.rgb_1, addr + 8);
 }
 
-<<<<<<< HEAD
-=======
 static u32 pcc_rescale(u32 raw, u32 user)
 {
 	int val = 0;
@@ -2460,7 +2436,6 @@ int mdss_mdp_user_pcc_config(struct mdp_pcc_cfg_data *config)
 }
 
 
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 int mdss_mdp_pcc_config(struct mdp_pcc_cfg_data *config,
 					u32 *copyback)
 {
@@ -2496,14 +2471,10 @@ int mdss_mdp_pcc_config(struct mdp_pcc_cfg_data *config,
 		*copyback = 1;
 		mdss_mdp_clk_ctrl(MDP_BLOCK_POWER_OFF, false);
 	} else {
-<<<<<<< HEAD
-		mdss_pp_res->pcc_disp_cfg[disp_num] = *config;
-=======
 		mdss_pp_res->raw_pcc_disp_cfg[disp_num] = *config;
 		pcc_combine(&mdss_pp_res->raw_pcc_disp_cfg[disp_num],
 					&mdss_pp_res->user_pcc_disp_cfg[disp_num],
 					&mdss_pp_res->pcc_disp_cfg[disp_num]);
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		mdss_pp_res->pp_disp_flags[disp_num] |= PP_FLAGS_DIRTY_PCC;
 	}
 
@@ -4326,11 +4297,7 @@ int mdss_mdp_ad_input(struct msm_fb_data_type *mfd,
 	mutex_lock(&ad->lock);
 	if ((!PP_AD_STATE_IS_INITCFG(ad->state) &&
 			!PP_AD_STS_IS_DIRTY(ad->sts)) &&
-<<<<<<< HEAD
-			((input->mode) != MDSS_AD_MODE_CALIB)) {
-=======
 			!input->mode == MDSS_AD_MODE_CALIB) {
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		pr_warn("AD not initialized or configured.");
 		ret = -EPERM;
 		goto error;

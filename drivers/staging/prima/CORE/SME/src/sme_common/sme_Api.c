@@ -11779,23 +11779,6 @@ eHalStatus sme_Encryptmsgsend (tHalHandle hHal,
     }
     return(status);
 }
-<<<<<<< HEAD
-tANI_BOOLEAN sme_IsCoexScoIndicationSet(tHalHandle hHal)
-{
-   eHalStatus status = eHAL_STATUS_FAILURE;
-   tANI_BOOLEAN valid = FALSE;
-   tpAniSirGlobal pMac = PMAC_STRUCT( hHal );
-
-   status = sme_AcquireGlobalLock( &pMac->sme );
-   if ( HAL_STATUS_SUCCESS( status ) )
-   {
-      valid = pMac->isCoexScoIndSet;
-   }
-   sme_ReleaseGlobalLock( &pMac->sme );
-   return (valid);
-}
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 eHalStatus sme_SetMiracastVendorConfig(tHalHandle hHal,
     tANI_U32 iniNumBuffAdvert , tANI_U32 set_value)

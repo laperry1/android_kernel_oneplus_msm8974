@@ -88,14 +88,11 @@ struct msm_compr_gapless_state {
 	bool use_dsp_gapless_mode;
 };
 
-<<<<<<< HEAD
-=======
 static unsigned int supported_sample_rates[] = {
 	8000, 11025, 12000, 16000, 22050, 24000, 32000, 44100, 48000, 64000,
 	88200, 96000, 176400, 192000
 };
 
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 struct msm_compr_pdata {
 	atomic_t audio_ocmem_req;
 	struct snd_compr_stream *cstream[MSM_FRONTEND_DAI_MAX];
@@ -158,10 +155,6 @@ struct msm_compr_audio {
 
 	wait_queue_head_t eos_wait;
 	wait_queue_head_t drain_wait;
-<<<<<<< HEAD
-	wait_queue_head_t flush_wait;
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	wait_queue_head_t close_wait;
 	wait_queue_head_t wait_for_stream_avail;
 
@@ -334,10 +327,6 @@ static void compr_event_handler(uint32_t opcode,
 			       " byte_offset = %d, copied_total = %d, token = %d\n",
 			       payload[3],
 			       payload[0],
-<<<<<<< HEAD
-			       prtd->byte_offset, prtd->copied_total, token);
-			atomic_set(&prtd->start, 0);
-=======
 				prtd->byte_offset, prtd->copied_total, token);
 
 			if (atomic_read(&prtd->drain) && prtd->last_buffer) {
@@ -349,7 +338,6 @@ static void compr_event_handler(uint32_t opcode,
 			} else {
 				atomic_set(&prtd->start, 0);
 			}
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		} else {
 			pr_debug("ASM_DATA_EVENT_WRITE_DONE_V2 offset %d, length %d\n",
 				 prtd->byte_offset, token);
@@ -483,10 +471,6 @@ static void compr_event_handler(uint32_t opcode,
 			pr_debug("token 0x%x, stream id %d\n", token,
 				  STREAM_ID_FROM_TOKEN(token));
 			prtd->cmd_ack = 1;
-<<<<<<< HEAD
-			wake_up(&prtd->flush_wait);
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 			break;
 		case ASM_DATA_CMD_REMOVE_INITIAL_SILENCE:
 			pr_debug("%s: ASM_DATA_CMD_REMOVE_INITIAL_SILENCE:",
@@ -564,11 +548,7 @@ static void populate_codec_list(struct msm_compr_audio *prtd)
 			COMPR_PLAYBACK_MIN_NUM_FRAGMENTS;
 	prtd->compr_cap.max_fragments =
 			COMPR_PLAYBACK_MAX_NUM_FRAGMENTS;
-<<<<<<< HEAD
-	prtd->compr_cap.num_codecs = 8;
-=======
 	prtd->compr_cap.num_codecs = 9;
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	prtd->compr_cap.codecs[0] = SND_AUDIOCODEC_MP3;
 	prtd->compr_cap.codecs[1] = SND_AUDIOCODEC_AAC;
 	prtd->compr_cap.codecs[2] = SND_AUDIOCODEC_AC3;
@@ -900,10 +880,6 @@ static int msm_compr_open(struct snd_compr_stream *cstream)
 
 	init_waitqueue_head(&prtd->eos_wait);
 	init_waitqueue_head(&prtd->drain_wait);
-<<<<<<< HEAD
-	init_waitqueue_head(&prtd->flush_wait);
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	init_waitqueue_head(&prtd->close_wait);
 	init_waitqueue_head(&prtd->wait_for_stream_avail);
 
@@ -1027,57 +1003,6 @@ static int msm_compr_set_params(struct snd_compr_stream *cstream,
 	struct snd_compr_runtime *runtime = cstream->runtime;
 	struct msm_compr_audio *prtd = runtime->private_data;
 	int ret = 0, frame_sz = 0, delay_time_ms = 0;
-<<<<<<< HEAD
-
-	pr_debug("%s\n", __func__);
-
-	memcpy(&prtd->codec_param, params, sizeof(struct snd_compr_params));
-
-	/* ToDo: remove duplicates */
-	prtd->num_channels = prtd->codec_param.codec.ch_in;
-
-	switch (prtd->codec_param.codec.sample_rate) {
-	case SNDRV_PCM_RATE_8000:
-		prtd->sample_rate = 8000;
-		break;
-	case SNDRV_PCM_RATE_11025:
-		prtd->sample_rate = 11025;
-		break;
-	/* ToDo: What about 12K and 24K sample rates ? */
-	case SNDRV_PCM_RATE_16000:
-		prtd->sample_rate = 16000;
-		break;
-	case SNDRV_PCM_RATE_22050:
-		prtd->sample_rate = 22050;
-		break;
-	case SNDRV_PCM_RATE_32000:
-		prtd->sample_rate = 32000;
-		break;
-	case SNDRV_PCM_RATE_44100:
-		prtd->sample_rate = 44100;
-		break;
-	case SNDRV_PCM_RATE_48000:
-		prtd->sample_rate = 48000;
-		break;
-	case SNDRV_PCM_RATE_64000:
-		prtd->sample_rate = 64000;
-		break;
-	case SNDRV_PCM_RATE_88200:
-		prtd->sample_rate = 88200;
-		break;
-	case SNDRV_PCM_RATE_96000:
-		prtd->sample_rate = 96000;
-		break;
-	case SNDRV_PCM_RATE_176400:
-		prtd->sample_rate = 176400;
-		break;
-	case SNDRV_PCM_RATE_192000:
-		prtd->sample_rate = 192000;
-		break;
-	}
-
-	pr_debug("%s: sample_rate %d\n", __func__, prtd->sample_rate);
-=======
 	int i, num_rates;
 	bool is_format_gapless = false;
 
@@ -1089,16 +1014,12 @@ static int msm_compr_set_params(struct snd_compr_stream *cstream,
 			break;
 	if (i == num_rates)
 		return -EINVAL;
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 	switch (params->codec.id) {
 	case SND_AUDIOCODEC_PCM: {
 		pr_debug("SND_AUDIOCODEC_PCM\n");
 		prtd->codec = FORMAT_LINEAR_PCM;
-<<<<<<< HEAD
-=======
 		is_format_gapless = true;
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		break;
 	}
 
@@ -1106,10 +1027,7 @@ static int msm_compr_set_params(struct snd_compr_stream *cstream,
 		pr_debug("SND_AUDIOCODEC_MP3\n");
 		prtd->codec = FORMAT_MP3;
 		frame_sz = MP3_OUTPUT_FRAME_SZ;
-<<<<<<< HEAD
-=======
 		is_format_gapless = true;
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		break;
 	}
 
@@ -1117,10 +1035,7 @@ static int msm_compr_set_params(struct snd_compr_stream *cstream,
 		pr_debug("SND_AUDIOCODEC_AAC\n");
 		prtd->codec = FORMAT_MPEG4_AAC;
 		frame_sz = AAC_OUTPUT_FRAME_SZ;
-<<<<<<< HEAD
-=======
 		is_format_gapless = true;
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		break;
 	}
 
@@ -1128,10 +1043,7 @@ static int msm_compr_set_params(struct snd_compr_stream *cstream,
 		pr_debug("SND_AUDIOCODEC_AC3\n");
 		prtd->codec = FORMAT_AC3;
 		frame_sz = AC3_OUTPUT_FRAME_SZ;
-<<<<<<< HEAD
-=======
 		is_format_gapless = true;
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		break;
 	}
 
@@ -1139,10 +1051,7 @@ static int msm_compr_set_params(struct snd_compr_stream *cstream,
 		pr_debug("SND_AUDIOCODEC_EAC3\n");
 		prtd->codec = FORMAT_EAC3;
 		frame_sz = EAC3_OUTPUT_FRAME_SZ;
-<<<<<<< HEAD
-=======
 		is_format_gapless = true;
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		break;
 	}
 
@@ -1175,14 +1084,6 @@ static int msm_compr_set_params(struct snd_compr_stream *cstream,
 		return -EINVAL;
 	}
 
-<<<<<<< HEAD
-	delay_time_ms = ((DSP_NUM_OUTPUT_FRAME_BUFFERED * frame_sz * 1000) /
-			prtd->sample_rate) + DSP_PP_BUFFERING_IN_MSEC;
-	delay_time_ms = delay_time_ms > PARTIAL_DRAIN_ACK_EARLY_BY_MSEC ?
-			delay_time_ms - PARTIAL_DRAIN_ACK_EARLY_BY_MSEC : 0;
-	prtd->partial_drain_delay = delay_time_ms;
-
-=======
 	if (!is_format_gapless) {
 		prtd->gapless_state.use_dsp_gapless_mode = false;
 	} else {
@@ -1201,7 +1102,6 @@ static int msm_compr_set_params(struct snd_compr_stream *cstream,
 	prtd->num_channels = prtd->codec_param.codec.ch_in;
 	prtd->sample_rate = prtd->codec_param.codec.sample_rate;
 	pr_debug("%s: sample_rate %d\n", __func__, prtd->sample_rate);
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	ret = msm_compr_configure_dsp(cstream);
 
 	return ret;
@@ -1351,11 +1251,6 @@ static int msm_compr_trigger(struct snd_compr_stream *cstream, int cmd)
 			spin_unlock_irqrestore(&prtd->lock, flags);
 			q6asm_stream_cmd(
 				prtd->audio_client, CMD_FLUSH, stream_id);
-<<<<<<< HEAD
-			wait_event_timeout(prtd->flush_wait,
-					prtd->cmd_ack, 1 * HZ);
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 			spin_lock_irqsave(&prtd->lock, flags);
 		} else {
 			prtd->first_buffer = 0;
@@ -1593,11 +1488,6 @@ static int msm_compr_trigger(struct snd_compr_stream *cstream, int cmd)
 			pr_debug("%s:issue CMD_FLUSH ac->stream_id %d",
 					      __func__, ac->stream_id);
 			q6asm_stream_cmd(ac, CMD_FLUSH, ac->stream_id);
-<<<<<<< HEAD
-			wait_event_timeout(prtd->flush_wait,
-					   prtd->cmd_ack, 1 * HZ / 4);
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 			q6asm_run_nowait(prtd->audio_client, 0, 0, 0);
 		}
@@ -1894,15 +1784,11 @@ static int msm_compr_get_codec_caps(struct snd_compr_stream *cstream,
 	case SND_AUDIOCODEC_MP3:
 		codec->num_descriptors = 2;
 		codec->descriptor[0].max_ch = 2;
-<<<<<<< HEAD
-		codec->descriptor[0].sample_rates = SNDRV_PCM_RATE_8000_48000;
-=======
 		memcpy(codec->descriptor[0].sample_rates,
 		       supported_sample_rates,
 		       sizeof(supported_sample_rates));
 		codec->descriptor[0].num_sample_rates =
 			sizeof(supported_sample_rates)/sizeof(unsigned int);
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		codec->descriptor[0].bit_rate[0] = 320; /* 320kbps */
 		codec->descriptor[0].bit_rate[1] = 128;
 		codec->descriptor[0].num_bitrates = 2;
@@ -1913,15 +1799,11 @@ static int msm_compr_get_codec_caps(struct snd_compr_stream *cstream,
 	case SND_AUDIOCODEC_AAC:
 		codec->num_descriptors = 2;
 		codec->descriptor[1].max_ch = 2;
-<<<<<<< HEAD
-		codec->descriptor[1].sample_rates = SNDRV_PCM_RATE_8000_48000;
-=======
 		memcpy(codec->descriptor[1].sample_rates,
 		       supported_sample_rates,
 		       sizeof(supported_sample_rates));
 		codec->descriptor[1].num_sample_rates =
 			sizeof(supported_sample_rates)/sizeof(unsigned int);
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		codec->descriptor[1].bit_rate[0] = 320; /* 320kbps */
 		codec->descriptor[1].bit_rate[1] = 128;
 		codec->descriptor[1].num_bitrates = 2;

@@ -137,21 +137,6 @@ static inline int atomic_cmpxchg(atomic_t *ptr, int old, int new)
 	return oldval;
 }
 
-<<<<<<< HEAD
-static inline void atomic_clear_mask(unsigned long mask, unsigned long *addr)
-{
-	unsigned long tmp, tmp2;
-
-	__asm__ __volatile__("@ atomic_clear_mask\n"
-"1:	ldrex	%0, [%3]\n"
-"	bic	%0, %0, %4\n"
-"	strex	%1, %0, [%3]\n"
-"	teq	%1, #0\n"
-"	bne	1b"
-	: "=&r" (tmp), "=&r" (tmp2), "+Qo" (*addr)
-	: "r" (addr), "Ir" (mask)
-	: "cc");
-=======
 static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 {
 	int oldval, newval;
@@ -177,7 +162,6 @@ static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 		smp_mb();
 
 	return oldval;
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 }
 
 #else /* ARM_ARCH_6 */
@@ -228,22 +212,6 @@ static inline int atomic_cmpxchg(atomic_t *v, int old, int new)
 	return ret;
 }
 
-<<<<<<< HEAD
-static inline void atomic_clear_mask(unsigned long mask, unsigned long *addr)
-{
-	unsigned long flags;
-
-	raw_local_irq_save(flags);
-	*addr &= ~mask;
-	raw_local_irq_restore(flags);
-}
-
-#endif /* __LINUX_ARM_ARCH__ */
-
-#define atomic_xchg(v, new) (xchg(&((v)->counter), new))
-
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 {
 	int c, old;
@@ -254,13 +222,10 @@ static inline int __atomic_add_unless(atomic_t *v, int a, int u)
 	return c;
 }
 
-<<<<<<< HEAD
-=======
 #endif /* __LINUX_ARM_ARCH__ */
 
 #define atomic_xchg(v, new) (xchg(&((v)->counter), new))
 
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 #define atomic_inc(v)		atomic_add(1, v)
 #define atomic_dec(v)		atomic_sub(1, v)
 
@@ -284,9 +249,6 @@ typedef struct {
 
 #define ATOMIC64_INIT(i) { (i) }
 
-<<<<<<< HEAD
-static inline u64 atomic64_read(atomic64_t *v)
-=======
 #ifdef CONFIG_ARM_LPAE
 static inline u64 atomic64_read(const atomic64_t *v)
 {
@@ -311,7 +273,6 @@ static inline void atomic64_set(atomic64_t *v, u64 i)
 }
 #else
 static inline u64 atomic64_read(const atomic64_t *v)
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 {
 	u64 result;
 
@@ -337,10 +298,7 @@ static inline void atomic64_set(atomic64_t *v, u64 i)
 	: "r" (&v->counter), "r" (i)
 	: "cc");
 }
-<<<<<<< HEAD
-=======
 #endif
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 static inline void atomic64_add(u64 i, atomic64_t *v)
 {

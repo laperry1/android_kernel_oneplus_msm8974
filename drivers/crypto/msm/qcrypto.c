@@ -456,10 +456,6 @@ static void qcrypto_ce_set_bus(struct crypto_engine *pengine,
 	int ret = 0;
 
 	if (high_bw_req) {
-<<<<<<< HEAD
-		pm_stay_awake(&pengine->pdev->dev);
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		ret = qce_enable_clk(pengine->qce);
 		if (ret) {
 			pr_err("%s Unable enable clk\n", __func__);
@@ -473,14 +469,7 @@ static void qcrypto_ce_set_bus(struct crypto_engine *pengine,
 			qce_disable_clk(pengine->qce);
 			goto clk_err;
 		}
-<<<<<<< HEAD
-
-
 	} else {
-
-=======
-	} else {
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		ret = msm_bus_scale_client_update_request(
 				pengine->bus_scale_handle, 0);
 		if (ret) {
@@ -498,16 +487,8 @@ static void qcrypto_ce_set_bus(struct crypto_engine *pengine,
 						__func__);
 			goto clk_err;
 		}
-<<<<<<< HEAD
-		pm_relax(&pengine->pdev->dev);
-	}
-	return;
-clk_err:
-	pm_relax(&pengine->pdev->dev);
-=======
 	}
 clk_err:
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	return;
 
 }
@@ -976,10 +957,6 @@ static void _qcrypto_remove_engine(struct crypto_engine *pengine)
 	cancel_work_sync(&pengine->bw_reaper_ws);
 	cancel_work_sync(&pengine->bw_allocate_ws);
 	del_timer_sync(&pengine->bw_reaper_timer);
-<<<<<<< HEAD
-	device_init_wakeup(&pengine->pdev->dev, false);
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 	if (pengine->bus_scale_handle != 0)
 		msm_bus_scale_unregister_client(pengine->bus_scale_handle);
@@ -4328,10 +4305,6 @@ static int  _qcrypto_probe(struct platform_device *pdev)
 	pengine->active_seq = 0;
 	pengine->last_active_seq = 0;
 	pengine->check_flag = false;
-<<<<<<< HEAD
-	device_init_wakeup(&pengine->pdev->dev, true);
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 	tasklet_init(&pengine->done_tasklet, req_done, (unsigned long)pengine);
 	crypto_init_queue(&pengine->req_queue, MSM_QCRYPTO_REQ_QUEUE_LENGTH);

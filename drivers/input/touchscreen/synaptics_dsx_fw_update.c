@@ -1447,11 +1447,7 @@ int synaptics_rmi4_get_firmware_version(int vendor, int lcd_type) {
 		return FIRMWARE_YOUNGFAST_VERSION;
 	} else if (vendor == TP_VENDOR_TPK) {
 #ifndef CONFIG_MACH_FIND7OP
-<<<<<<< HEAD
-		if (get_pcb_version() >= HW_VERSION__21)
-=======
 		if (get_pcb_version() >= HW_VERSION__20)
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 			return FIRMWARE_TPK_FIND7S_VERSION;
 		else
 			return FIRMWARE_TPK_VERSION;
@@ -1569,11 +1565,7 @@ static unsigned char* fwu_rmi4_get_firmware_data(void) {
 		firmwaredata = (unsigned char*)Syna_Firmware_Data_youngfast;
 	else if (vendor_id == TP_VENDOR_TPK) {
 #ifndef CONFIG_MACH_FIND7OP
-<<<<<<< HEAD
-		if (get_pcb_version() >= HW_VERSION__21)
-=======
 		if (get_pcb_version() >= HW_VERSION__20)
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 			firmwaredata = (unsigned char*)Syna_Firmware_Data_tpk_find7s;
 		else
 			firmwaredata = (unsigned char*)Syna_Firmware_Data_tpk;

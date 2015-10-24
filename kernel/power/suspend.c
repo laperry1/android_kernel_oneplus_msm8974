@@ -27,10 +27,7 @@
 #include <linux/ftrace.h>
 #include <linux/rtc.h>
 #include <trace/events/power.h>
-<<<<<<< HEAD
-=======
 #include <linux/wakeup_reason.h>
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 #include "power.h"
 
@@ -113,11 +110,7 @@ static int suspend_prepare(void)
 	error = suspend_freeze_processes();
 	if (!error)
 		return 0;
-<<<<<<< HEAD
-
-=======
 	log_suspend_abort_reason("One or more tasks refusing to freeze");
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	suspend_stats.failed_freeze++;
 	dpm_save_failed_step(SUSPEND_FREEZE);
  Finish:
@@ -147,12 +140,8 @@ void __attribute__ ((weak)) arch_suspend_enable_irqs(void)
  */
 static int suspend_enter(suspend_state_t state, bool *wakeup)
 {
-<<<<<<< HEAD
-	int error;
-=======
 	char suspend_abort[MAX_SUSPEND_ABORT_LEN];
 	int error, last_dev;
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 	if (suspend_ops->prepare) {
 		error = suspend_ops->prepare();
@@ -162,15 +151,11 @@ static int suspend_enter(suspend_state_t state, bool *wakeup)
 
 	error = dpm_suspend_end(PMSG_SUSPEND);
 	if (error) {
-<<<<<<< HEAD
-		printk(KERN_ERR "PM: Some devices failed to power down\n");
-=======
 		last_dev = suspend_stats.last_failed_dev + REC_FAILED_NUM - 1;
 		last_dev %= REC_FAILED_NUM;
 		printk(KERN_ERR "PM: Some devices failed to power down\n");
 		log_suspend_abort_reason("%s device failed to power down",
 			suspend_stats.failed_devs[last_dev]);
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		goto Platform_finish;
 	}
 
@@ -184,15 +169,10 @@ static int suspend_enter(suspend_state_t state, bool *wakeup)
 		goto Platform_wake;
 
 	error = disable_nonboot_cpus();
-<<<<<<< HEAD
-	if (error || suspend_test(TEST_CPUS))
-		goto Enable_cpus;
-=======
 	if (error || suspend_test(TEST_CPUS)) {
 		log_suspend_abort_reason("Disabling non-boot cpus failed");
 		goto Enable_cpus;
 	}
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 	arch_suspend_disable_irqs();
 	BUG_ON(!irqs_disabled());
@@ -203,13 +183,10 @@ static int suspend_enter(suspend_state_t state, bool *wakeup)
 		if (!(suspend_test(TEST_CORE) || *wakeup)) {
 			error = suspend_ops->enter(state);
 			events_check_enabled = false;
-<<<<<<< HEAD
-=======
 		} else {
 			pm_get_active_wakeup_sources(suspend_abort,
 				MAX_SUSPEND_ABORT_LEN);
 			log_suspend_abort_reason(suspend_abort);
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		}
 		syscore_resume();
 	}
@@ -257,10 +234,7 @@ int suspend_devices_and_enter(suspend_state_t state)
 	error = dpm_suspend_start(PMSG_SUSPEND);
 	if (error) {
 		printk(KERN_ERR "PM: Some devices failed to suspend\n");
-<<<<<<< HEAD
-=======
 		log_suspend_abort_reason("Some devices failed to suspend");
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		goto Recover_platform;
 	}
 	suspend_test_finish("suspend devices");

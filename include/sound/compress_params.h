@@ -55,10 +55,7 @@
 #define MAX_NUM_CODECS 32
 #define MAX_NUM_CODEC_DESCRIPTORS 32
 #define MAX_NUM_BITRATES 32
-<<<<<<< HEAD
-=======
 #define MAX_NUM_SAMPLE_RATES 32
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 /* compressed TX */
 #define MAX_NUM_FRAMES_PER_BUFFER 1
@@ -366,12 +363,8 @@ union snd_codec_options {
 
 /** struct snd_codec_desc - description of codec capabilities
  * @max_ch: Maximum number of audio channels
-<<<<<<< HEAD
- * @sample_rates: Sampling rates in Hz, use SNDRV_PCM_RATE_xxx for this
-=======
  * @sample_rates: Sampling rates in Hz, use values like 48000 for this
  * @num_sample_rates: Number of valid values in sample_rates array
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
  * @bit_rate: Indexed array containing supported bit rates
  * @num_bitrates: Number of valid values in bit_rate array
  * @rate_control: value is specified by SND_RATECONTROLMODE defines.
@@ -393,12 +386,8 @@ union snd_codec_options {
 
 struct snd_codec_desc {
 	__u32 max_ch;
-<<<<<<< HEAD
-	__u32 sample_rates;
-=======
 	__u32 sample_rates[MAX_NUM_SAMPLE_RATES];
 	__u32 num_sample_rates;
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	__u32 bit_rate[MAX_NUM_BITRATES];
 	__u32 num_bitrates;
 	__u32 rate_control;
@@ -416,12 +405,8 @@ struct snd_codec_desc {
  * @ch_out: Number of output channels. In case of contradiction between
  *		this field and the channelMode field, the channelMode field
  *		overrides.
-<<<<<<< HEAD
- * @sample_rate: Audio sample rate of input data
-=======
  * @sample_rate: Audio sample rate of input data in Hz, use values like 48000
  *             for this.
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
  * @bit_rate: Bitrate of encoded data. May be ignored by decoders
  * @rate_control: Encoding rate control. See SND_RATECONTROLMODE defines.
  *               Encoders may rely on profiles for quality levels.

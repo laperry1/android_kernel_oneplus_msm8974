@@ -18,9 +18,6 @@
 #ifndef _LINUX_WAKEUP_REASON_H
 #define _LINUX_WAKEUP_REASON_H
 
-<<<<<<< HEAD
-void log_wakeup_reason(int irq);
-=======
 #include <linux/types.h>
 #include <linux/completion.h>
 
@@ -103,6 +100,5 @@ void log_base_wakeup_reason(int irq);
 void clear_wakeup_reasons(void);
 void log_suspend_abort_reason(const char *fmt, ...);
 int check_wakeup_reason(int irq);
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 #endif /* _LINUX_WAKEUP_REASON_H */

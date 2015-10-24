@@ -1180,11 +1180,7 @@ static int qseecom_unload_app(struct qseecom_dev_handle *data,
 			return -EFAULT;
 		}
 		if (resp.result == QSEOS_RESULT_SUCCESS)
-<<<<<<< HEAD
-			pr_info("App (%d) is unloaded!!\n",
-=======
 			pr_debug("App (%d) is unloaded!!\n",
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 					data->client.app_id);
 		__qseecom_cleanup_app(data);
 		if (resp.result == QSEOS_RESULT_INCOMPLETE) {
@@ -1205,17 +1201,10 @@ static int qseecom_unload_app(struct qseecom_dev_handle *data,
 		} else {
 			if (ptr_app->ref_cnt == 1) {
 				ptr_app->ref_cnt = 0;
-<<<<<<< HEAD
-				pr_info("ref_count set to 0\n");
-			} else {
-				ptr_app->ref_cnt--;
-				pr_info("Can't unload app(%d) inuse\n",
-=======
 				pr_debug("ref_count set to 0\n");
 			} else {
 				ptr_app->ref_cnt--;
 				pr_debug("Can't unload app(%d) inuse\n",
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 					ptr_app->app_id);
 			}
 		}
@@ -4122,24 +4111,16 @@ static int qseecom_release(struct inode *inode, struct file *file)
 	int ret = 0;
 
 	if (data->released == false) {
-<<<<<<< HEAD
-		pr_warn("data: released = false, type = %d, data = 0x%x\n",
-=======
 		pr_debug("data: released = false, type = %d, data = 0x%x\n",
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 			data->type, (u32)data);
 		switch (data->type) {
 		case QSEECOM_LISTENER_SERVICE:
 			ret = qseecom_unregister_listener(data);
 			break;
 		case QSEECOM_CLIENT_APP:
-<<<<<<< HEAD
-			ret = qseecom_unload_app(data, true);
-=======
 			mutex_lock(&app_access_lock);
 			ret = qseecom_unload_app(data, true);
 			mutex_unlock(&app_access_lock);
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 			break;
 		case QSEECOM_SECURE_SERVICE:
 		case QSEECOM_GENERIC:

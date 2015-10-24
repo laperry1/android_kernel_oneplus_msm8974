@@ -9526,12 +9526,9 @@ static int hdd_driver_init( void)
 #ifdef HAVE_WCNSS_CAL_DOWNLOAD
    int max_retries = 0;
 #endif
-<<<<<<< HEAD
-=======
 #ifdef HAVE_CBC_DONE
    int max_cbc_retries = 0;
 #endif
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 #ifdef WLAN_LOGGING_SOCK_SVC_ENABLE
    wlan_logging_sock_init_svc();
@@ -9560,10 +9557,7 @@ static int hdd_driver_init( void)
    while (!wcnss_device_ready() && 5 >= ++max_retries) {
        msleep(1000);
    }
-<<<<<<< HEAD
-=======
 
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
    if (max_retries >= 5) {
       hddLog(VOS_TRACE_LEVEL_FATAL,"%s: WCNSS driver not ready", __func__);
 #ifdef WLAN_OPEN_SOURCE
@@ -9578,8 +9572,6 @@ static int hdd_driver_init( void)
    }
 #endif
 
-<<<<<<< HEAD
-=======
 #ifdef HAVE_CBC_DONE
    while (!wcnss_cbc_complete() && 10 >= ++max_cbc_retries) {
        msleep(1000);
@@ -9589,7 +9581,6 @@ static int hdd_driver_init( void)
    }
 #endif
 
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
    dev = wcnss_wlan_get_device();
 #endif // ANI_BUS_TYPE_PLATFORM
 
@@ -9729,26 +9720,12 @@ static void hdd_driver_exit(void)
    }
    else
    {
-<<<<<<< HEAD
-      /* We wait for active entry threads to exit from driver
-       * by waiting until rtnl_lock is available.
-       */
-      rtnl_lock();
-      rtnl_unlock();
-
-      INIT_COMPLETION(pHddCtx->ssr_comp_var);
-      if (pHddCtx->isLogpInProgress)
-      {
-         VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_ERROR,
-              "%s:SSR  in Progress; block rmmod !!!", __func__);
-=======
        INIT_COMPLETION(pHddCtx->ssr_comp_var);
 
        if (pHddCtx->isLogpInProgress)
        {
          VOS_TRACE(VOS_MODULE_ID_HDD, VOS_TRACE_LEVEL_FATAL,
               "%s:SSR in Progress; block rmmod !!!", __func__);
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
          rc = wait_for_completion_timeout(&pHddCtx->ssr_comp_var,
                                           msecs_to_jiffies(30000));
          if(!rc)
@@ -9759,15 +9736,10 @@ static void hdd_driver_exit(void)
          }
        }
 
-<<<<<<< HEAD
-      pHddCtx->isLoadUnloadInProgress = WLAN_HDD_UNLOAD_IN_PROGRESS;
-      vos_set_load_unload_in_progress(VOS_MODULE_ID_VOSS, TRUE);
-=======
       rtnl_lock();
       pHddCtx->isLoadUnloadInProgress = WLAN_HDD_UNLOAD_IN_PROGRESS;
       vos_set_load_unload_in_progress(VOS_MODULE_ID_VOSS, TRUE);
       rtnl_unlock();
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
       /* Driver Need to send country code 00 in below condition
        * 1) If gCountryCodePriority is set to 1; and last country
@@ -10176,22 +10148,6 @@ v_BOOL_t hdd_is_apps_power_collapse_allowed(hdd_context_t* pHddCtx)
                  (eANI_BOOLEAN_TRUE == scanRspPending) ||
                  (eANI_BOOLEAN_TRUE == inMiddleOfRoaming))
             {
-<<<<<<< HEAD
-                if(pmcState == FULL_POWER &&
-                   sme_IsCoexScoIndicationSet(pHddCtx->hHal))
-                {
-                    /*
-                     * When SCO indication comes from Coex module , host will
-                     * enter in to full power mode, but this should not prevent
-                     * apps processor power collapse.
-                     */
-                    hddLog(LOG1,
-                       FL("Allow apps power collapse"
-                          "even when sco indication is set"));
-                    return TRUE;
-                }
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
                 hddLog( LOGE, "%s: do not allow APPS power collapse-"
                     "pmcState = %d scanRspPending = %d inMiddleOfRoaming = %d",
                     __func__, pmcState, scanRspPending, inMiddleOfRoaming );

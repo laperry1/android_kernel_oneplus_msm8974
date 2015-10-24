@@ -523,11 +523,7 @@ typedef enum
 
 #define CFG_GO_KEEP_ALIVE_PERIOD_NAME          "gGoKeepAlivePeriod"
 #define CFG_GO_KEEP_ALIVE_PERIOD_MIN           ( 3 )
-<<<<<<< HEAD
-#define CFG_GO_KEEP_ALIVE_PERIOD_MAX           ( 255 )
-=======
 #define CFG_GO_KEEP_ALIVE_PERIOD_MAX           ( 20 )
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 #define CFG_GO_KEEP_ALIVE_PERIOD_DEFAULT       ( 5 )
 
 #define CFG_AP_LINK_MONITOR_PERIOD_NAME          "gApLinkMonitorPeriod"
