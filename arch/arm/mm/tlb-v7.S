@@ -35,11 +35,7 @@
 ENTRY(v7wbi_flush_user_tlb_range)
 	vma_vm_mm r3, r2			@ get vma->vm_mm
 	mmid	r3, r3				@ get vm_mm->context.id
-<<<<<<< HEAD
-	dsb
-=======
 	dsb	ish
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	mov	r0, r0, lsr #PAGE_SHIFT		@ align address
 	mov	r1, r1, lsr #PAGE_SHIFT
 #ifdef CONFIG_ARCH_MSM8X60
@@ -64,11 +60,7 @@ ENTRY(v7wbi_flush_user_tlb_range)
 	add	r0, r0, #PAGE_SZ
 	cmp	r0, r1
 	blo	1b
-<<<<<<< HEAD
-	dsb
-=======
 	dsb	ish
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	mov	pc, lr
 ENDPROC(v7wbi_flush_user_tlb_range)
 
@@ -81,11 +73,7 @@ ENDPROC(v7wbi_flush_user_tlb_range)
  *	- end   - end address (exclusive, may not be aligned)
  */
 ENTRY(v7wbi_flush_kern_tlb_range)
-<<<<<<< HEAD
-	dsb
-=======
 	dsb	ish
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	mov	r0, r0, lsr #PAGE_SHIFT		@ align address
 	mov	r1, r1, lsr #PAGE_SHIFT
 	mov	r0, r0, lsl #PAGE_SHIFT
@@ -100,11 +88,7 @@ ENTRY(v7wbi_flush_kern_tlb_range)
 	add	r0, r0, #PAGE_SZ
 	cmp	r0, r1
 	blo	1b
-<<<<<<< HEAD
-	dsb
-=======
 	dsb	ish
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	isb
 	mov	pc, lr
 ENDPROC(v7wbi_flush_kern_tlb_range)

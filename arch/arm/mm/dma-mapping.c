@@ -148,21 +148,14 @@ static void *arm_coherent_dma_alloc(struct device *dev, size_t size,
 	dma_addr_t *handle, gfp_t gfp, struct dma_attrs *attrs);
 static void arm_coherent_dma_free(struct device *dev, size_t size, void *cpu_addr,
 				  dma_addr_t handle, struct dma_attrs *attrs);
-<<<<<<< HEAD
-=======
 static int arm_coherent_dma_mmap(struct device *dev, struct vm_area_struct *vma,
 		 void *cpu_addr, dma_addr_t dma_addr, size_t size,
 		 struct dma_attrs *attrs);
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 
 struct dma_map_ops arm_coherent_dma_ops = {
 	.alloc			= arm_coherent_dma_alloc,
 	.free			= arm_coherent_dma_free,
-<<<<<<< HEAD
-	.mmap			= arm_dma_mmap,
-=======
 	.mmap			= arm_coherent_dma_mmap,
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	.get_sgtable		= arm_dma_get_sgtable,
 	.map_page		= arm_coherent_dma_map_page,
 	.map_sg			= arm_dma_map_sg,
@@ -481,9 +474,6 @@ void __init dma_contiguous_remap(void)
 		map.type = MT_MEMORY_DMA_READY;
 
 		/*
-<<<<<<< HEAD
-		 * Clear previous low-memory mapping
-=======
 		 * Clear previous low-memory mapping to ensure that the
 		 * TLB does not see any conflicting entries, then flush
 		 * the TLB of the old entries before creating new mappings.
@@ -491,18 +481,14 @@ void __init dma_contiguous_remap(void)
 		 * This ensures that any speculatively loaded TLB entries
 		 * (even though they may be rare) can not cause any problems,
 		 * and ensures that this code is architecturally compliant.
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		 */
 		for (addr = __phys_to_virt(start); addr < __phys_to_virt(end);
 		     addr += PMD_SIZE)
 			pmd_clear(pmd_off_k(addr));
 
-<<<<<<< HEAD
-=======
 		flush_tlb_kernel_range(__phys_to_virt(start),
 				       __phys_to_virt(end));
 
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		iotable_init(&map, 1);
 	}
 }
@@ -823,14 +809,7 @@ static void *arm_coherent_dma_alloc(struct device *dev, size_t size,
 			   __builtin_return_address(0), attrs);
 }
 
-<<<<<<< HEAD
-/*
- * Create userspace mapping for the DMA-coherent memory.
- */
-int arm_dma_mmap(struct device *dev, struct vm_area_struct *vma,
-=======
 static int __arm_dma_mmap(struct device *dev, struct vm_area_struct *vma,
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 		 void *cpu_addr, dma_addr_t dma_addr, size_t size,
 		 struct dma_attrs *attrs)
 {
@@ -841,11 +820,6 @@ static int __arm_dma_mmap(struct device *dev, struct vm_area_struct *vma,
 	unsigned long pfn = dma_to_pfn(dev, dma_addr);
 	unsigned long off = vma->vm_pgoff;
 
-<<<<<<< HEAD
-	vma->vm_page_prot = __get_dma_pgprot(attrs, vma->vm_page_prot);
-
-=======
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
 	if (dma_mmap_from_coherent(dev, vma, cpu_addr, size, &ret))
 		return ret;
 
@@ -861,8 +835,6 @@ static int __arm_dma_mmap(struct device *dev, struct vm_area_struct *vma,
 }
 
 /*
-<<<<<<< HEAD
-=======
  * Create userspace mapping for the DMA-coherent memory.
  */
 static int arm_coherent_dma_mmap(struct device *dev, struct vm_area_struct *vma,
@@ -883,7 +855,6 @@ int arm_dma_mmap(struct device *dev, struct vm_area_struct *vma,
 }
 
 /*
->>>>>>> 06b8e73d2a5a72319192223b85db4543f75fb1bd
  * Free a buffer as defined by the above mapping.
  */
 static void __arm_dma_free(struct device *dev, size_t size, void *cpu_addr,
