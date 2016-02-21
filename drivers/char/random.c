@@ -302,22 +302,14 @@
  * The minimum number of bits of entropy before we wake up a read on
  * /dev/random.  Should be enough to do a significant reseed.
  */
-<<<<<<< HEAD
-static int random_read_wakeup_thresh = 128;
-=======
 static int random_read_wakeup_bits = 64;
->>>>>>> 5c051f5... Backport the random driver from Linux 4.1 (longterm)
 
 /*
  * If the entropy count falls under this number of bits, then we
  * should wake up processes which are selecting or polling on write
  * access to /dev/random.
  */
-<<<<<<< HEAD
-static int random_write_wakeup_thresh = 256;
-=======
 static int random_write_wakeup_bits = 28 * OUTPUT_POOL_WORDS;
->>>>>>> 5c051f5... Backport the random driver from Linux 4.1 (longterm)
 
 /*
  * The minimum number of seconds between urandom pool reseeding.  We
